@@ -1,4 +1,5 @@
-﻿using SurveyTask.Models.QuestionClass;
+﻿using SurveyTask.Models.AnsweredQuestionClass;
+using SurveyTask.Models.QuestionClass;
 
 namespace SurveyTask.Models.AnswerClass
 {
@@ -16,6 +17,10 @@ namespace SurveyTask.Models.AnswerClass
 
         public DateTime? DeletedAt { get; set; }
 
+
+
         public Question Question {  get; set; }
+
+        public virtual ICollection<AnsweredQuestion> AnsweredQuestions { get;}
     }
 }

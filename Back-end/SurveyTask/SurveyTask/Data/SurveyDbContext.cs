@@ -1,9 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SurveyTask.Models;
 using SurveyTask.Models.AnswerClass;
+using SurveyTask.Models.AnsweredQuestionClass;
 using SurveyTask.Models.ClientClass;
 using SurveyTask.Models.ProjectClass;
 using SurveyTask.Models.QuestionClass;
+using SurveyTask.Models.SubmissionClass;
+using SurveyTask.Models.WeightClass;
+using SurveyTask.Models.WeightVersionClass;
 using System.Diagnostics;
 
 namespace SurveyTask.Data
@@ -23,14 +27,61 @@ namespace SurveyTask.Data
 
         public DbSet<Answer> Answers { get; set; }
 
+        public DbSet<Submission> Submissions { get; set; }
+
+        public DbSet<AnsweredQuestion> AnsweredQuestions { get; set; }
+
+        public DbSet<WeightVersion> WeightVersions { get; set; }
+
+        public DbSet<Weight> Weights { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<AnsweredQuestion>().HasKey(nameof(AnsweredQuestion.SubmissionId), nameof(AnsweredQuestion.AnswerId));
+
+            //Question - Answers
             modelBuilder.Entity<Question>()
                 .HasMany(p => p.Answers)
                 .WithOne(g => g.Question)
                 .HasForeignKey(p => p.QuestionId);
+
+            //Project - Submissions
+            modelBuilder.Entity<Project>()
+                .HasMany(p => p.Submissions)
+                .WithOne(g => g.Project)
+                .HasForeignKey(p => p.ProjectId);
+
+            //Submission - AnsweredQuestions
+            modelBuilder.Entity<Submission>()
+                .HasMany(p => p.AnsweredQuestions)
+                .WithOne(g => g.Submission)
+                .HasForeignKey(p => p.SubmissionId);
+
+            //WeightVersion - Submissions
+            modelBuilder.Entity<WeightVersion>()
+                .HasMany(p => p.Submissions)
+                .WithOne(g => g.WeightVersion)
+                .HasForeignKey(p => p.WeightVersionId);
+
+            //WeightVersion - Weights
+            modelBuilder.Entity<WeightVersion>()
+                .HasMany(p => p.Weights)
+                .WithOne(g => g.WeightVersion)
+                .HasForeignKey(p => p.WeightVersionId);
+
+            //Answer - AnswerdQuestions
+            modelBuilder.Entity<Answer>()
+                .HasMany(p => p.AnsweredQuestions)
+                .WithOne(g => g.Answer)
+                .HasForeignKey(p => p.AnswerId);
+
+            //Client - Projects
+/*            modelBuilder.Entity<Client>()
+                .HasMany(p => p.Projects)
+                .WithOne(g => g.Client)
+                .HasForeignKey(p => p.ClientId);*/
 
             var clients = new List<Client>()
             {
@@ -112,7 +163,7 @@ namespace SurveyTask.Data
                     Description = "How would you rate the current pace of the project?",
                     Required = true,
                     Type = 1,
-                    Index = 1,
+                    Index = 2,
                     Order = 2,
                     DeletedAt = null
                 },
@@ -122,7 +173,7 @@ namespace SurveyTask.Data
                     Description = "How effective is the current team collaboration?",
                     Required = true,
                     Type = 1,
-                    Index = 1,
+                    Index = 3,
                     Order = 3,
                     DeletedAt = null
                 }
@@ -221,6 +272,68 @@ namespace SurveyTask.Data
                 },
             };
 
+            var submission = new List<Submission>() {};
+
+            var answeredQuestions = new List<AnsweredQuestion>(){};
+
+            var weights = new List<Weight>() 
+            {
+
+                new Weight() { 
+                    Id = 1,
+                    Value = 1,
+                    WeightVersionId = 1,
+                    Index = 1,
+                    DeletedAt= null
+                },
+
+
+                new Weight() {
+                    Id = 2,
+                    Value = 1,
+                    WeightVersionId = 1,
+                    Index = 2,
+                    DeletedAt= null
+                },
+
+
+                new Weight() {
+                    Id = 3,
+                    Value = 1,
+                    WeightVersionId = 1,
+                    Index = 3,
+                    DeletedAt= null
+                },
+            };
+
+            var weightVersions = new List<WeightVersion>() 
+            {
+
+                new WeightVersion()
+                {
+                    Id = 1,
+                    VersionName = "Initial version",
+                    VersionNumber = 1,
+                    DeletedAt = null
+                },
+
+                new WeightVersion()
+                {
+                    Id = 2,
+                    VersionName = "Second version",
+                    VersionNumber = 2,
+                    DeletedAt = null
+                },
+
+                new WeightVersion()
+                {
+                    Id = 3,
+                    VersionName = "Third version",
+                    VersionNumber = 3,
+                    DeletedAt = null
+                },
+            };
+
             modelBuilder.Entity<Client>().HasData(clients);
 
             modelBuilder.Entity<Project>().HasData(projects);
@@ -228,6 +341,14 @@ namespace SurveyTask.Data
             modelBuilder.Entity<Question>().HasData(questions);
 
             modelBuilder.Entity<Answer>().HasData(answers);
+
+            modelBuilder.Entity<Submission>().HasData(submission);
+
+            modelBuilder.Entity<AnsweredQuestion>().HasData(answeredQuestions);
+
+            modelBuilder.Entity<Weight>().HasData(weights);
+
+            modelBuilder.Entity<WeightVersion>().HasData(weightVersions);
 
         }
 

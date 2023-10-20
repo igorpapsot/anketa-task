@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SurveyTask.Data;
@@ -11,9 +12,11 @@ using SurveyTask.Data;
 namespace SurveyTask.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    partial class SurveyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231020113106_relations-added")]
+    partial class relationsadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,7 +282,7 @@ namespace SurveyTask.Migrations
                         {
                             Id = 2,
                             Description = "How would you rate the current pace of the project?",
-                            Index = 2,
+                            Index = 1,
                             Order = 2,
                             Required = true,
                             Type = 1
@@ -288,7 +291,7 @@ namespace SurveyTask.Migrations
                         {
                             Id = 3,
                             Description = "How effective is the current team collaboration?",
-                            Index = 3,
+                            Index = 1,
                             Order = 3,
                             Required = true,
                             Type = 1
@@ -346,29 +349,6 @@ namespace SurveyTask.Migrations
                     b.HasIndex("WeightVersionId");
 
                     b.ToTable("Weights");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Index = 1,
-                            Value = 1,
-                            WeightVersionId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Index = 2,
-                            Value = 1,
-                            WeightVersionId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Index = 3,
-                            Value = 1,
-                            WeightVersionId = 1
-                        });
                 });
 
             modelBuilder.Entity("SurveyTask.Models.WeightVersionClass.WeightVersion", b =>
@@ -392,26 +372,6 @@ namespace SurveyTask.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WeightVersions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            VersionName = "Initial version",
-                            VersionNumber = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            VersionName = "Second version",
-                            VersionNumber = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            VersionName = "Third version",
-                            VersionNumber = 3
-                        });
                 });
 
             modelBuilder.Entity("SurveyTask.Models.AnswerClass.Answer", b =>

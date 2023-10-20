@@ -1,4 +1,6 @@
-﻿namespace SurveyTask.Models.WeightClass
+﻿using SurveyTask.Models.WeightVersionClass;
+
+namespace SurveyTask.Models.WeightClass
 {
     public class Weight
     {
@@ -11,5 +13,8 @@
         public int Value { get; set; }
 
         public DateTime? DeletedAt { get; set; }
+
+
+        public WeightVersion WeightVersion { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SurveyTask.Models.ProjectClass
+﻿using SurveyTask.Models.SubmissionClass;
+
+namespace SurveyTask.Models.ProjectClass
 {
     public class Project
     {
@@ -9,5 +11,8 @@
         public string Name { get; set; }
 
         public DateTime? DeletedAt { get; set; }
+
+
+        public virtual ICollection<Submission> Submissions { get; set; }
     }
 }

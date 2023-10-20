@@ -18,6 +18,8 @@ namespace SurveyTask.Models.QuestionClass
 
             public DateTime? DeletedAt { get; set; }
 
+            
+
             public virtual ICollection<Answer> Answers { get; set; }
         }
 }
