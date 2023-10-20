@@ -10,7 +10,6 @@ const FormButton = () => {
     const projectId = useSelector((state: RootState) => state.project.projectId)
 
     const submitHandler = (e: React.FormEvent) => {
-        e.preventDefault()
         console.log(projectId)
     }
 

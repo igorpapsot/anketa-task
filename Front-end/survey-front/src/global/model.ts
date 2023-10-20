@@ -18,10 +18,6 @@ interface Question {
     answers: Answer[];
 }
 
-interface Choice {
-
-}
-
 interface Client {
     id: number
     name: string
@@ -33,4 +29,17 @@ interface Project {
     id: number
     name: string
     deletedAt: string | null
+}
+
+interface Submission {
+    projectId: number
+    //id: number
+    //weightVersionId: number
+    //deletedAt: null
+    answeredQuestions: AnsweredQuestion[]
+}
+
+interface AnsweredQuestion {
+    answerId: number
+    submissionId?: number
 }

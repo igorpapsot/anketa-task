@@ -2,15 +2,20 @@ import { useState } from "react";
 import InputChoice from "./InputChoice";
 import InputQuestion from "./InputQuestion";
 
-const InputField = ({ question }: { question: Question }) => {
+const InputField = ({ question, addAnswer }: { question: Question; addAnswer: any }) => {
 
     const [selectedId, setSelectedId] = useState<number>()
+
+    const setSelectedIdHandler = (id: number) => {
+        setSelectedId(id)
+        addAnswer(id)
+    }
 
     return (
         <div className="inputField">
             <InputQuestion question={question} />
             {question.answers.map((a: Answer) => {
-                return <InputChoice answer={a} selectedId={selectedId} setSelectedId={setSelectedId} key={a.id} />
+                return <InputChoice answer={a} selectedId={selectedId} setSelectedId={setSelectedIdHandler} key={a.id} />
             })}
         </div>
     )
