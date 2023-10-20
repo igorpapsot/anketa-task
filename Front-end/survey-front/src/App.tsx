@@ -2,6 +2,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './App.css'
 import Form from './components/FormComponents/Form'
 import NavHeader from './components/Header/NavHeader'
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 function App() {
 
@@ -9,8 +11,10 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <NavHeader />
-      <Form />
+      <Provider store={store}>
+        <NavHeader />
+        <Form />
+      </Provider>
     </QueryClientProvider>
   )
 }

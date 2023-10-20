@@ -5,18 +5,22 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { clientUrl } from "../../global/env";
 
-const getClient = async () => {
-    console.log("Getting clients...")
-    return await axios.get(clientUrl);
-};
-
 const FormHeader = () => {
 
     const [selectedClientId, setSelectedClientId] = useState<number>()
 
+    const getClients = async () => {
+        console.log("Getting clients...")
+        const res = await axios.get(clientUrl);
+        if (res && res.status == 200) {
+            setSelectedClientId(res.data[0].id)
+            return res
+        }
+    };
+
     const { data } = useQuery({
-        queryKey: ['getClient'],
-        queryFn: getClient,
+        queryKey: ['getClients'],
+        queryFn: getClients,
     });
 
     return (

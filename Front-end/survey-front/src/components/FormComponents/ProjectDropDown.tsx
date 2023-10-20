@@ -1,11 +1,15 @@
 import axios from "axios";
 import { projectUrl } from "../../global/env";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { projectActions } from "../../redux/project";
+import { RootState } from "./FormButton";
 
 const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefined }) => {
 
     const [projects, setProjects] = useState<Project[]>()
-    const [selectedProjectId, setSelectedProjectId] = useState<number>()
+    const dispatch = useDispatch()
+    const projectId = useSelector((state: RootState) => state.project.projectId)
 
     const getProjects = async () => {
         if (selectedClient) {
@@ -22,7 +26,7 @@ const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefine
     }, [selectedClient])
 
     const selectHandler = (e: string) => {
-        setSelectedProjectId(Number(e))
+        dispatch(projectActions.setProjectId(e))
     }
 
     const label = <label>Project:</label>
@@ -31,7 +35,7 @@ const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefine
         return (
             <>
                 {label}
-                <select className="clientDropdown button">
+                <select className="dropdown button">
                     <option>No project found</option>
                 </select>
             </>
@@ -41,7 +45,8 @@ const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefine
     return (
         <>
             {label}
-            <select className="clientDropdown button" onChange={(e) => { selectHandler(e.target.value) }}>
+            <select className="dropdown button" value={projectId} onChange={(e) => { selectHandler(e.target.value) }}>
+                {projectId === -1 && <option value={-1} hidden>Select project</option>}
                 {projects.map((p: Project) => {
                     return <option value={p.id} key={p.id}>{p.name}</option>
                 })}

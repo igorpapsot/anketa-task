@@ -62,14 +62,20 @@
     font-size: medium;
 }
 
-.clientDropdown {
+.dropdown {
     padding: 5px 20px;
     margin: 5px;
+    width: 25vh;
+    text-align: center;
 }
 
 .submitBtn:hover {
     background-color: rgb(205, 204, 204);
     cursor: pointer;
+}
+
+.submitBtn:disabled:active {
+    box-shadow: none;
 }
 
 .submitBtn:active {
