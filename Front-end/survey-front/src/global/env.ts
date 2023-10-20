@@ -4,4 +4,6 @@ const clientUrl = baseUrl + "api/Client/"
 
 const projectUrl = baseUrl + "api/Project/"
 
-export { clientUrl, projectUrl }
+const questionUrl = baseUrl + "api/Questions/"
+
+export { clientUrl, projectUrl, questionUrl }

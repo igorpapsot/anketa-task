@@ -9,8 +9,9 @@ const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefine
 
     const getProjects = async () => {
         if (selectedClient) {
+            console.log("Getting projects...")
             const res = await axios.get(projectUrl + selectedClient);
-            if (res) {
+            if (res && res.status == 200) {
                 setProjects(res.data)
             }
         }

@@ -1,8 +1,8 @@
-const InputQuestion = ({ question }: { question: string }) => {
+const InputQuestion = ({ question }: { question: Question }) => {
 
     return (
         <>
-            <h3>{question}</h3>
+            <h3>{question.description}</h3>
         </>
     )
 }

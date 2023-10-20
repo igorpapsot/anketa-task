@@ -1,9 +1,21 @@
-interface Input {
-
+interface Answer {
+    questionId: number;
+    id: number;
+    description: string;
+    value: number;
+    order: number;
+    deletedAt: any;
 }
 
 interface Question {
-
+    id: number;
+    description: string;
+    required: boolean;
+    type: number;
+    index: number;
+    order: number;
+    deletedAt: any;
+    answers: Answer[];
 }
 
 interface Choice {

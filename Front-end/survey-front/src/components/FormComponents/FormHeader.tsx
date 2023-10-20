@@ -5,13 +5,13 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { clientUrl } from "../../global/env";
 
-export const getClient = async () => {
+const getClient = async () => {
+    console.log("Getting clients...")
     return await axios.get(clientUrl);
 };
 
 const FormHeader = () => {
 
-    //const [clients, setClients] = useState<Client[]>()
     const [selectedClientId, setSelectedClientId] = useState<number>()
 
     const { data } = useQuery({

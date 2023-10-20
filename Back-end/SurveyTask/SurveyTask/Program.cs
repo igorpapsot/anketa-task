@@ -26,11 +26,6 @@ builder.Services.AddScoped<IQuestionRepository, SQLQuestionRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-});
-
 builder.Services.AddCors(o =>
 {
     o.AddPolicy("cors", p =>
