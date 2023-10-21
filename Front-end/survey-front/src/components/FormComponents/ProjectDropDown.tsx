@@ -1,14 +1,16 @@
 import axios from "axios";
 import { projectUrl } from "../../global/env";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { projectActions } from "../../redux/project";
 import { RootState } from "./FormButton";
+import { useNavigate } from "react-router-dom"
 
 const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefined }) => {
 
     const [projects, setProjects] = useState<Project[]>()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const projectId = useSelector((state: RootState) => state.project.projectId)
 
     const getProjects = async () => {
@@ -27,6 +29,7 @@ const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefine
 
     const selectHandler = (e: string) => {
         dispatch(projectActions.setProjectId(e))
+        navigate("survey/" + projectId)
     }
 
     const label = <label>Project:</label>
@@ -46,7 +49,7 @@ const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefine
         <>
             {label}
             <select className="dropdown button" value={projectId} onChange={(e) => { selectHandler(e.target.value) }}>
-                {projectId === -1 && <option value={-1} hidden>Select project</option>}
+                {projectId === -1 || selectedClient == -1 ? <option value={-1} hidden>Select project</option> : <option value={-1}>Select project</option>}
                 {projects.map((p: Project) => {
                     return <option value={p.id} key={p.id}>{p.name}</option>
                 })}
@@ -55,4 +58,4 @@ const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefine
     )
 }
 
-export default ProjectDropDown;
+export default memo(ProjectDropDown);

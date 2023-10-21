@@ -1,6 +1,5 @@
 import InputField from "../InputComponents/InputField";
 import FormButton, { RootState } from "./FormButton";
-import FormHeader from "./FormHeader";
 import axios from "axios";
 import { questionUrl } from "../../global/env";
 import { useQuery } from "@tanstack/react-query";
@@ -44,7 +43,6 @@ const Form = () => {
 
     return (
         <div className="form">
-            <FormHeader />
             <form onSubmit={(e) => handleSubmitForm(e)}>
                 {questions?.data
                     .map((q: Question) => {
@@ -52,8 +50,6 @@ const Form = () => {
                     })}
                 <FormButton />
             </form>
-
-
         </div>
     )
 }

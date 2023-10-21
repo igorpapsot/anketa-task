@@ -1,9 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './App.css'
-import Form from './components/FormComponents/Form'
 import NavHeader from './components/Header/NavHeader'
 import { Provider } from 'react-redux'
 import store from './redux/store'
+import { Outlet } from 'react-router-dom'
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <NavHeader />
-        <Form />
+        <Outlet />
       </Provider>
     </QueryClientProvider>
   )

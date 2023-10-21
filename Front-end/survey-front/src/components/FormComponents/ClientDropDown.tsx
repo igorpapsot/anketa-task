@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { projectActions } from "../../redux/project";
 
-const ClientDropDown = ({ clients, setSelectedClient }: { clients: Client[] | undefined, setSelectedClient: any }) => {
+const ClientDropDown = ({ clients, clientId, setSelectedClient }: { clients: Client[] | undefined, setSelectedClient: any; clientId: number }) => {
 
     const dispatch = useDispatch()
 
@@ -27,6 +27,7 @@ const ClientDropDown = ({ clients, setSelectedClient }: { clients: Client[] | un
         <>
             {label}
             <select className="dropdown button" onChange={(e) => { selectHandler(e.target.value) }}>
+                {clientId === -1 && <option value={-1} hidden>Select client</option>}
                 {clients.map((c: Client) => {
                     return <option value={c.id} key={c.id}>{c.name}</option>
                 })}

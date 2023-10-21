@@ -5,15 +5,14 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { clientUrl } from "../../global/env";
 
-const FormHeader = () => {
+const FormSelect = () => {
 
-    const [selectedClientId, setSelectedClientId] = useState<number>()
+    const [selectedClientId, setSelectedClientId] = useState<number>(-1)
 
     const getClients = async () => {
         console.log("Getting clients...")
         const res = await axios.get(clientUrl);
         if (res && res.status == 200) {
-            setSelectedClientId(res.data[0].id)
             return res
         }
     };
@@ -26,10 +25,10 @@ const FormHeader = () => {
     return (
         <div className="formHeader">
             <h1>Survey for evaluating clients</h1>
-            <ClientDropDown clients={data?.data} setSelectedClient={setSelectedClientId} />
+            <ClientDropDown clients={data?.data} clientId={selectedClientId} setSelectedClient={setSelectedClientId} />
             <ProjectDropDown selectedClient={selectedClientId} />
         </div>
     )
 }
 
-export default FormHeader;
+export default FormSelect;
