@@ -23,7 +23,7 @@ const FormSelect = () => {
     });
 
     return (
-        <div className="formHeader">
+        <div className="dropDownPage">
             <h1>Survey for evaluating clients</h1>
             <ClientDropDown clients={data?.data} clientId={selectedClientId} setSelectedClient={setSelectedClientId} />
             <ProjectDropDown selectedClient={selectedClientId} />

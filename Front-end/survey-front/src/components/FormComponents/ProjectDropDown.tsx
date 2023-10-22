@@ -29,7 +29,7 @@ const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefine
 
     const selectHandler = (e: string) => {
         dispatch(projectActions.setProjectId(e))
-        navigate("survey/" + projectId)
+        navigate("survey/" + e)
     }
 
     const label = <label>Project:</label>
@@ -50,6 +50,7 @@ const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefine
             {label}
             <select className="dropdown button" value={projectId} onChange={(e) => { selectHandler(e.target.value) }}>
                 {projectId === -1 || selectedClient == -1 ? <option value={-1} hidden>Select project</option> : <option value={-1}>Select project</option>}
+                {selectedClient === -1 && <option value={-1} disabled>Please select client first</option>}
                 {projects.map((p: Project) => {
                     return <option value={p.id} key={p.id}>{p.name}</option>
                 })}

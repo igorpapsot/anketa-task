@@ -1,3 +1,12 @@
+/*Survey form*/
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
 .inputField {
     display: grid;
     grid-template-columns: 40% 20% 20% 20%;
@@ -20,52 +29,9 @@
     align-self: center;
 }
 
-.formHeader {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-}
-
-.navHeader {
-    background-color: rgb(205, 204, 204);
-    border-radius: 0px 0px 5px 5px;
-    padding: 15px;
-    display: flex;
-    margin: 0px;
-}
-
-.submitBtnArea {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.button {
-    background-color: rgb(205, 204, 204);
-    border: 1px rgb(115, 110, 110) solid;
-    border-radius: 5px;
-    font-family: fantasy;
-}
-
 .submitBtn {
     padding: 5px 40px;
     font-size: medium;
-}
-
-.dropdown {
-    padding: 5px 20px;
-    margin: 5px;
-    width: 25vh;
-    text-align: center;
 }
 
 .submitBtn:hover {
@@ -81,18 +47,97 @@
     box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(190, 211, 251, 0.25), 0px 0px 0px 3.5px rgba(62, 66, 74, 0.5);
 }
 
+.submitBtnArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Dropdown page*/
+
+.dropDownPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown {
+    padding: 5px 20px;
+    margin: 5px;
+    width: 35vh;
+    text-align: center;
+}
+
+/*Auth form*/
+
+.authPage {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.authInput {
+    padding: 5px 20px;
+    margin: 5px;
+    width: 35vh;
+}
+
 .authButton {
+    margin: 10px;
+    padding: 5px 20px;
+}
+
+.authButton:hover {
+    cursor: pointer;
+}
+
+.authButton:disabled:active {
+    box-shadow: none;
+}
+
+.authButton:active {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(190, 211, 251, 0.25), 0px 0px 0px 3.5px rgba(62, 66, 74, 0.5);
+}
+
+/*Nav*/
+
+.navHeader {
+    background-color: rgb(205, 204, 204);
+    border-radius: 0px 0px 5px 5px;
+    padding: 15px;
+    margin: 0px;
+    display: grid;
+    grid-template-columns: 80% 10% 10%;
+}
+
+.navLink {
     border: 0px;
     margin: 0px 10px;
     padding: 5px 20px;
     font-size: large;
+    font-weight: bolder;
+    text-decoration: none;
+    color: black;
+    font-family: fantasy;
 }
 
-.authButton:hover {
-    background-color: rgb(178, 178, 178);
+.navLink:hover {
     cursor: pointer;
 }
 
+
+
+/*General*/
+
+.button {
+    background-color: rgb(205, 204, 204);
+    border: 1px rgb(115, 110, 110) solid;
+    border-radius: 5px;
+    font-family: fantasy;
+}
 
 h1 {
     font-family: fantasy;
@@ -104,6 +149,7 @@ h3 {
 
 label {
     font-family: fantasy;
+    margin-top: 10px;
 }
 
 body {
