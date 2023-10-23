@@ -6,6 +6,11 @@ namespace SurveyTask.Models.SubmissionClass
 {
     public class Submission
     {
+        public Submission()
+        {
+            AnsweredQuestions = new List<AnsweredQuestion>();
+        }
+
         public int ProjectId { get; set; }
 
         public int Id { get; set; }

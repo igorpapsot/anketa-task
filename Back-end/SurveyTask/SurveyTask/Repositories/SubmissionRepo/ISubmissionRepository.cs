@@ -8,6 +8,6 @@ namespace SurveyTask.Repositories.SubmissionRepo
 
         Task<List<Submission>> GetByClientId(int clientId);
 
-        Task<Submission> CreateSubmission(Submission submission);
+        Task<Submission> Create(Submission submission);
     }
 }

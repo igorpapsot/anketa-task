@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SurveyTask.Data;
-using SurveyTask.Models.ClientClass;
 using SurveyTask.Models.SubmissionClass;
 
 namespace SurveyTask.Repositories.SubmissionRepo
@@ -14,9 +13,20 @@ namespace SurveyTask.Repositories.SubmissionRepo
             this.dbContext = dbContext;
         }
 
-        public async Task<Submission> CreateSubmission(Submission submission)
+        public async Task<Submission> Create(Submission submission)
         {
-            throw new NotImplementedException();
+            await dbContext.Submissions.AddAsync(submission);
+            await dbContext.SaveChangesAsync();
+
+            // Now you have the submission.Id available
+            foreach (var answeredQuestion in submission.AnsweredQuestions)
+            {
+                answeredQuestion.SubmissionId = submission.Id;
+            }
+
+            await dbContext.SaveChangesAsync();
+
+            return submission;
         }
 
         public async Task<List<Submission>> GetByClientId(int clientId)
@@ -26,7 +36,7 @@ namespace SurveyTask.Repositories.SubmissionRepo
 
         public async Task<List<Submission>> GetByProjectId(int projectId)
         {
-            return await dbContext.Submissions.Where(x => x.ProjectId == projectId).ToListAsync(); ;
+            return await dbContext.Submissions.Where(x => x.ProjectId == projectId).ToListAsync();
         }
     }
 }

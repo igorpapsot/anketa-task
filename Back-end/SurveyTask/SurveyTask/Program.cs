@@ -8,6 +8,7 @@ using SurveyTask.Repositories.ClientRepo;
 using SurveyTask.Repositories.ProjectRepo;
 using SurveyTask.Repositories.QuestionRepo;
 using SurveyTask.Repositories.SubmissionRepo;
+using SurveyTask.Repositories.WeightVersionRepo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,7 @@ builder.Services.AddScoped<IProjectRepository, SQLProjectRepository>();
 builder.Services.AddScoped<IClientRepository, SQLClientRepository>();
 builder.Services.AddScoped<IQuestionRepository, SQLQuestionRepository>();
 builder.Services.AddScoped<ISubmissionRepository, SQLSubmissionRepository>();
+builder.Services.AddScoped<IWeightVersionRepository, SQLWeightVersion>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 

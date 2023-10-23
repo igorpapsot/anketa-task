@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SurveyTask.Models.AnsweredQuestionClass;
 using SurveyTask.Models.SubmissionClass;
-using SurveyTask.Repositories.ProjectRepo;
 using SurveyTask.Repositories.SubmissionRepo;
+using SurveyTask.Repositories.WeightVersionRepo;
 
 namespace SurveyTask.Controllers
 {
@@ -13,11 +14,14 @@ namespace SurveyTask.Controllers
     {
         private readonly IMapper mapper;
         private readonly ISubmissionRepository submissionRepository;
+        private readonly IWeightVersionRepository weightVersionRepository;
 
-        public SubmissionsController(IMapper mapper, ISubmissionRepository submissionRepository)
+        public SubmissionsController(IMapper mapper, ISubmissionRepository submissionRepository,
+            IWeightVersionRepository weightVersionRepository)
         {
             this.mapper = mapper;
             this.submissionRepository = submissionRepository;
+            this.weightVersionRepository = weightVersionRepository;
         }
 
         [HttpGet]
@@ -31,34 +35,19 @@ namespace SurveyTask.Controllers
                 return NotFound();
             }
 
-            return Ok(mapper.Map<SubmissionRead>(submissions));
+            return Ok(mapper.Map<List<SubmissionRead>>(submissions));
         }
-
-/*        [HttpGet]
-        [Route("{clientId:int}")]
-        public async Task<IActionResult> GetByClientId([FromRoute] int clientId)
-        {
-            var submissions = await submissionRepository.GetByClientId(clientId);
-
-            if (submissions == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(mapper.Map<SubmissionRead>(submissions));
-        }*/
 
         [HttpPost]
-        public async Task<IActionResult> CreateSubmission([FromBody] Submission submission)
+        public async Task<IActionResult> CreateSubmission([FromBody] SubmissionWrite submissionReq)
         {
-            /*var region = mapper.Map<Region>(addRegionDTO);
+            var submission = mapper.Map<Submission>(submissionReq);
+            submission.WeightVersionId = weightVersionRepository.GetCurrentVersion().Result.Id;
 
-            region = await regionRepository.CreateAsync(region);
+            submission = await submissionRepository.Create(submission);
 
-            var RegionDTO = mapper.Map<RegionDTO>(region);
-
-            return CreatedAtAction(nameof(GetById), new { id = RegionDTO.Id }, RegionDTO);*/
-            return Ok();
+            return Ok(mapper.Map<SubmissionRead>(submission));
         }
+
     }
 }
