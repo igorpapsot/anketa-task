@@ -8,7 +8,7 @@ const InputField = ({ question, addAnswer }: { question: Question; addAnswer: an
 
     const setSelectedIdHandler = (id: number) => {
         setSelectedId(id)
-        addAnswer(id)
+        addAnswer(id, question.id)
     }
 
     return (

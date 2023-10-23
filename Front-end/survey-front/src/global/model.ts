@@ -40,6 +40,7 @@ interface Submission {
 }
 
 interface AnsweredQuestion {
+    questionId: number
     answerId: number
     submissionId?: number
 }

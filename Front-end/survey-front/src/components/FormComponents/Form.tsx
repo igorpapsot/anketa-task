@@ -1,15 +1,16 @@
 import InputField from "../InputComponents/InputField";
-import FormButton, { RootState } from "./FormButton";
+import FormButton from "./FormButton";
 import axios from "axios";
 import { questionUrl } from "../../global/env";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const Form = () => {
 
     const [answers, setAnswers] = useState<AnsweredQuestion[]>([])
-    const projectId = useSelector((state: RootState) => state.project.projectId)
+    //const projectId = useSelector((state: RootState) => state.project.projectId)
+    const { projectId } = useParams()
 
     const getQuestions = async () => {
         console.log("Getting questions...")
@@ -24,12 +25,15 @@ const Form = () => {
         queryFn: getQuestions,
     });
 
-    const handleAddAnswers = (answerId: number) => {
-        var answeredQuestion: AnsweredQuestion = {
-            answerId: answerId
+    const handleAddAnswers = (answerId: number, questionId: number) => {
+        const answerExists = answers.some((answer) => answer.questionId === questionId);
+        if (!answerExists) {
+            var answeredQuestion: AnsweredQuestion = {
+                answerId: answerId,
+                questionId: questionId
+            }
+            setAnswers((prevState) => [...prevState, answeredQuestion]);
         }
-        //TODO: Dodati odgovor na pitanje ako ne postoji ili zameniti postojeci
-        setAnswers((prevState: any) => [...prevState, answeredQuestion])
     }
 
     const handleSubmitForm = (e: React.FormEvent) => {
@@ -48,7 +52,7 @@ const Form = () => {
                     .map((q: Question) => {
                         return <InputField question={q} key={q.id} addAnswer={handleAddAnswers}></InputField>
                     })}
-                <FormButton />
+                <FormButton projectId={Number(projectId)} />
             </form>
         </div>
     )

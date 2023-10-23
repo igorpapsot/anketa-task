@@ -1,21 +1,16 @@
-import { useSelector } from "react-redux";
 
 export interface RootState {
     project: {
         projectId: number;
     };
 }
-const FormButton = () => {
+const FormButton = ({ projectId }: { projectId: number }) => {
 
-    const projectId = useSelector((state: RootState) => state.project.projectId)
-
-    const submitHandler = (e: React.FormEvent) => {
-        console.log(projectId)
-    }
+    //const projectId = useSelector((state: RootState) => state.project.projectId)
 
     return (
         <div className="submitBtnArea">
-            <button className="submitBtn button" type="submit" disabled={projectId === -1} onClick={(e) => { submitHandler(e) }}>Submit</button>
+            <button className="submitBtn button" type="submit" disabled={projectId === -1} onClick={() => console.log(projectId)}>Submit</button>
         </div>
     )
 }

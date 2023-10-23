@@ -1,17 +1,15 @@
 import axios from "axios";
 import { projectUrl } from "../../global/env";
 import { memo, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { projectActions } from "../../redux/project";
-import { RootState } from "./FormButton";
 import { useNavigate } from "react-router-dom"
 
 const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefined }) => {
 
     const [projects, setProjects] = useState<Project[]>()
-    const dispatch = useDispatch()
     const navigate = useNavigate()
-    const projectId = useSelector((state: RootState) => state.project.projectId)
+    //const dispatch = useDispatch()
+    //const projectId = useSelector((state: RootState) => state.project.projectId)
+    const [projectId,] = useState<number>(-1)
 
     const getProjects = async () => {
         if (selectedClient) {
@@ -28,7 +26,7 @@ const ProjectDropDown = ({ selectedClient }: { selectedClient: number | undefine
     }, [selectedClient])
 
     const selectHandler = (e: string) => {
-        dispatch(projectActions.setProjectId(e))
+        //dispatch(projectActions.setProjectId(e))
         navigate("survey/" + e)
     }
 
