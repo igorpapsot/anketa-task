@@ -3,6 +3,7 @@ using SurveyTask.Models.AnswerClass;
 using SurveyTask.Models.ClientClass;
 using SurveyTask.Models.ProjectClass;
 using SurveyTask.Models.QuestionClass;
+using SurveyTask.Models.SubmissionClass;
 
 namespace SurveyTask.Mappings
 {
@@ -13,6 +14,8 @@ namespace SurveyTask.Mappings
             CreateMap<Client, ClientRead>().ReverseMap();
             CreateMap<Project, ProjectRead>().ReverseMap();
             CreateMap<Question, QuestionRead>().ReverseMap();
+            CreateMap<Submission, SubmissionRead>().ReverseMap();
+            CreateMap<Submission, SubmissionWrite>().ReverseMap();
             CreateMap<Answer, AnswerRead>()
             .ForMember(dest => dest.QuestionId, opt => opt.MapFrom(src => src.QuestionId))
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))

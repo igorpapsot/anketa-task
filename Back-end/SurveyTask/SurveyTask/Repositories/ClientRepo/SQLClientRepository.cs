@@ -8,20 +8,16 @@ namespace SurveyTask.Repositories.ClientRepo
 {
     public class SQLClientRepository : IClientRepository
     {
-        private readonly IMapper mapper;
         private readonly SurveyDbContext dbContext;
 
-        public SQLClientRepository(IMapper mapper, SurveyDbContext dbContext)
+        public SQLClientRepository(SurveyDbContext dbContext)
         {
-            this.mapper = mapper;
             this.dbContext = dbContext;
         }
 
-        public async Task<List<ClientRead>> GetAll()
+        public async Task<List<Client>> GetAll()
         {
-            var clients = await dbContext.Clients.ToListAsync();
-
-            return mapper.Map<List<ClientRead>>(clients);
+            return await dbContext.Clients.ToListAsync();
         }
 
     }

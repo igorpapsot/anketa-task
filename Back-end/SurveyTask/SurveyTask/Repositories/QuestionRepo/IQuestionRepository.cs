@@ -4,6 +4,6 @@ namespace SurveyTask.Repositories.QuestionRepo
 {
     public interface IQuestionRepository
     {
-        Task<List<QuestionRead>> GetAll();
+        Task<List<Question>> GetAll();
     }
 }

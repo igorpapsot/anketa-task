@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SurveyTask.Models.ClientClass;
 using SurveyTask.Repositories;
 using SurveyTask.Repositories.ClientRepo;
 
@@ -8,12 +9,12 @@ namespace SurveyTask.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientController : ControllerBase
+    public class ClientsController : ControllerBase
     {
         private readonly IMapper mapper;
         private readonly IClientRepository clientRepository;
 
-        public ClientController(IMapper mapper, IClientRepository clientRepository)
+        public ClientsController(IMapper mapper, IClientRepository clientRepository)
         {
             this.mapper = mapper;
             this.clientRepository = clientRepository;
@@ -24,7 +25,7 @@ namespace SurveyTask.Controllers
         {
             var clients = await clientRepository.GetAll();
 
-            return Ok(clients);
+            return Ok(mapper.Map<List<ClientRead>>(clients));
         }
     }
 }

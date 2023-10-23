@@ -4,6 +4,6 @@ namespace SurveyTask.Repositories.ProjectRepo
 {
     public interface IProjectRepository
     {
-        Task<List<ProjectRead>> GetByClientId(int clientId);
+        Task<List<Project>> GetByClientId(int clientId);
     }
 }

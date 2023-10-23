@@ -4,10 +4,10 @@ namespace SurveyTask.Repositories.SubmissionRepo
 {
     public interface ISubmissionRepository
     {
-        Task<List<SubmissionRead>> GetByProjectId(int projectId);
+        Task<List<Submission>> GetByProjectId(int projectId);
 
-        Task<List<SubmissionRead>> GetByClientId(int clientId);
+        Task<List<Submission>> GetByClientId(int clientId);
 
-        Task<SubmissionWrite> CreateSubmission(Submission submission);
+        Task<Submission> CreateSubmission(Submission submission);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SurveyTask.Repositories.ClientRepo;
+using SurveyTask.Models.QuestionClass;
 using SurveyTask.Repositories.QuestionRepo;
 
 namespace SurveyTask.Controllers
@@ -22,9 +21,9 @@ namespace SurveyTask.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var clients = await questionRepository.GetAll();
+            var questions = await questionRepository.GetAll();
 
-            return Ok(clients);
+            return Ok(mapper.Map<List<QuestionRead>>(questions));
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SurveyTask.Models.ProjectClass;
 using SurveyTask.Repositories;
 using SurveyTask.Repositories.ProjectRepo;
 
@@ -8,12 +9,12 @@ namespace SurveyTask.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectController : ControllerBase
+    public class ProjectsController : ControllerBase
     {
         private readonly IMapper mapper;
         private readonly IProjectRepository projectRepository;
 
-        public ProjectController(IMapper mapper, IProjectRepository projectRepository)
+        public ProjectsController(IMapper mapper, IProjectRepository projectRepository)
         {
             this.mapper = mapper;
             this.projectRepository = projectRepository;
@@ -30,7 +31,7 @@ namespace SurveyTask.Controllers
                return NotFound();
             }
 
-            return Ok(projects);
+            return Ok(mapper.Map<List<ProjectRead>>(projects));
 
         }
     }

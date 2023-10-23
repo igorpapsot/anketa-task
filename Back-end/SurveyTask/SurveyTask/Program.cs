@@ -7,6 +7,7 @@ using SurveyTask.Repositories;
 using SurveyTask.Repositories.ClientRepo;
 using SurveyTask.Repositories.ProjectRepo;
 using SurveyTask.Repositories.QuestionRepo;
+using SurveyTask.Repositories.SubmissionRepo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ options.UseNpgsql(builder.Configuration.GetConnectionString("SurveyTaskConnectio
 builder.Services.AddScoped<IProjectRepository, SQLProjectRepository>();
 builder.Services.AddScoped<IClientRepository, SQLClientRepository>();
 builder.Services.AddScoped<IQuestionRepository, SQLQuestionRepository>();
+builder.Services.AddScoped<ISubmissionRepository, SQLSubmissionRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 

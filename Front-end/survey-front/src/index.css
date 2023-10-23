@@ -109,8 +109,8 @@
     border-radius: 0px 0px 5px 5px;
     padding: 15px;
     margin: 0px;
-    display: grid;
-    grid-template-columns: 80% 10% 10%;
+    display: flex;
+    /* grid-template-columns: 80% 10% 10%; */
 }
 
 .navLink {
@@ -128,6 +128,9 @@
     cursor: pointer;
 }
 
+.navLinkHome {
+    margin-right: auto;
+}
 
 
 /*General*/
