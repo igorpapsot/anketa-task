@@ -53,6 +53,20 @@
     align-items: center;
 }
 
+.formError {
+    font-family: fantasy;
+    color: rgb(217, 48, 48);
+    font-size: large;
+    font-weight: bold;
+}
+
+.formSuccess {
+    font-family: fantasy;
+    color: rgb(29, 193, 29);
+    font-size: large;
+    font-weight: bold;
+}
+
 /*Dropdown page*/
 
 .dropDownPage {

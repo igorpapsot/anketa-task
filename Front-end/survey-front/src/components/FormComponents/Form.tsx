@@ -1,14 +1,34 @@
 import InputField from "../InputComponents/InputField";
 import FormButton from "./FormButton";
-import axios from "axios";
-import { questionUrl } from "../../global/env";
+import axios, { AxiosError } from "axios";
+import { questionUrl, submissionUrl } from "../../global/env";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
+export const sendSubmssion = async (
+    submission: Submission
+) => {
+    try {
+        const response = await axios.post(submissionUrl, {
+            projectId: submission.projectId,
+            answeredQuestions: submission.answeredQuestions,
+        });
+        return response.status;
+    } catch (e) {
+        let error = e as AxiosError;
+        if (error.response) {
+            return error.response.status;
+        } else {
+            return false;
+        }
+    }
+};
+
 const Form = () => {
 
     const [answers, setAnswers] = useState<AnsweredQuestion[]>([])
+    const [formReponse, setFormReponse] = useState<string>("")
     //const projectId = useSelector((state: RootState) => state.project.projectId)
     const { projectId } = useParams()
 
@@ -36,17 +56,35 @@ const Form = () => {
         }
     }
 
-    const handleSubmitForm = (e: React.FormEvent) => {
+    const handleSubmitForm = async (e: React.FormEvent) => {
         e.preventDefault()
         var submission: Submission = {
             answeredQuestions: answers,
             projectId: Number(projectId)
         }
-        console.log(submission)
+
+        if (submission.projectId != -1 && submission.answeredQuestions.length === 3) {
+            var res = await sendSubmssion(submission)
+            if (res === false) {
+                setFormReponse("Something went wrong")
+            }
+            else if (res === 200) {
+                setFormReponse("Succesfull submission")
+            }
+            else {
+                console.log(res)
+                setFormReponse("Something went wrong")
+            }
+        }
+        else {
+            setFormReponse("Please answer all questions")
+        }
+
     }
 
     return (
         <div className="form">
+            <label className={formReponse === "Succesfull submission" ? "formSuccess" : "formError"}>{formReponse}</label>
             <form onSubmit={(e) => handleSubmitForm(e)}>
                 {questions?.data
                     .map((q: Question) => {
