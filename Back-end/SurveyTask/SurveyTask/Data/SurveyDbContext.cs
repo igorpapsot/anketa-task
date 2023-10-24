@@ -282,7 +282,7 @@ namespace SurveyTask.Data
                 new Weight() { 
                     Id = 1,
                     Value = 1,
-                    WeightVersionId = 1,
+                    WeightVersionId = 3,
                     Index = 1,
                     DeletedAt= null
                 },
@@ -290,8 +290,8 @@ namespace SurveyTask.Data
 
                 new Weight() {
                     Id = 2,
-                    Value = 1,
-                    WeightVersionId = 1,
+                    Value = 2,
+                    WeightVersionId = 3,
                     Index = 2,
                     DeletedAt= null
                 },
@@ -299,8 +299,8 @@ namespace SurveyTask.Data
 
                 new Weight() {
                     Id = 3,
-                    Value = 1,
-                    WeightVersionId = 1,
+                    Value = 3,
+                    WeightVersionId = 3,
                     Index = 3,
                     DeletedAt= null
                 },

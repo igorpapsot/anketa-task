@@ -5,6 +5,7 @@ using SurveyTask.Models.AnsweredQuestionClass;
 using SurveyTask.Models.SubmissionClass;
 using SurveyTask.Repositories.SubmissionRepo;
 using SurveyTask.Repositories.WeightVersionRepo;
+using SurveyTask.Services.Submissions;
 
 namespace SurveyTask.Controllers
 {
@@ -15,13 +16,15 @@ namespace SurveyTask.Controllers
         private readonly IMapper mapper;
         private readonly ISubmissionRepository submissionRepository;
         private readonly IWeightVersionRepository weightVersionRepository;
+        private readonly ISubmissionService submissionService;
 
         public SubmissionsController(IMapper mapper, ISubmissionRepository submissionRepository,
-            IWeightVersionRepository weightVersionRepository)
+            IWeightVersionRepository weightVersionRepository, ISubmissionService submissionService)
         {
             this.mapper = mapper;
             this.submissionRepository = submissionRepository;
             this.weightVersionRepository = weightVersionRepository;
+            this.submissionService = submissionService;
         }
 
         [HttpGet]
@@ -47,6 +50,20 @@ namespace SurveyTask.Controllers
             submission = await submissionRepository.Create(submission);
 
             return Ok(mapper.Map<SubmissionRead>(submission));
+        }
+
+        [HttpGet]
+        [Route("Grades/{projectId}")]
+        public async Task<IActionResult> GetGrades([FromRoute] int projectId)
+        {
+            var grades = await submissionService.GetGrades(projectId);
+
+            if (grades == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(grades);
         }
 
     }

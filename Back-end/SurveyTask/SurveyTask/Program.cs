@@ -4,11 +4,14 @@ using Microsoft.Extensions.Configuration;
 using SurveyTask.Data;
 using SurveyTask.Mappings;
 using SurveyTask.Repositories;
+using SurveyTask.Repositories.AnswerRepo;
 using SurveyTask.Repositories.ClientRepo;
 using SurveyTask.Repositories.ProjectRepo;
 using SurveyTask.Repositories.QuestionRepo;
 using SurveyTask.Repositories.SubmissionRepo;
+using SurveyTask.Repositories.WeightRepo;
 using SurveyTask.Repositories.WeightVersionRepo;
+using SurveyTask.Services.Submissions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +30,9 @@ builder.Services.AddScoped<IClientRepository, SQLClientRepository>();
 builder.Services.AddScoped<IQuestionRepository, SQLQuestionRepository>();
 builder.Services.AddScoped<ISubmissionRepository, SQLSubmissionRepository>();
 builder.Services.AddScoped<IWeightVersionRepository, SQLWeightVersion>();
+builder.Services.AddScoped<IAnswerRepository, SQLAnswerRepository>();
+builder.Services.AddScoped<IWeightRepository, SQLWeightRepository>();
+builder.Services.AddScoped<ISubmissionService, SubmissionService>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 

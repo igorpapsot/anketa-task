@@ -36,7 +36,7 @@ namespace SurveyTask.Repositories.SubmissionRepo
 
         public async Task<List<Submission>> GetByProjectId(int projectId)
         {
-            return await dbContext.Submissions.Where(x => x.ProjectId == projectId).ToListAsync();
+            return await dbContext.Submissions.Where(x => x.ProjectId == projectId).Include(x => x.WeightVersion).ThenInclude(x => x.Weights).ToListAsync();
         }
     }
 }

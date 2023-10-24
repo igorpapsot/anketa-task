@@ -5,6 +5,8 @@ using SurveyTask.Models.ClientClass;
 using SurveyTask.Models.ProjectClass;
 using SurveyTask.Models.QuestionClass;
 using SurveyTask.Models.SubmissionClass;
+using SurveyTask.Models.WeightClass;
+using SurveyTask.Models.WeightVersionClass;
 
 namespace SurveyTask.Mappings
 {
@@ -18,6 +20,8 @@ namespace SurveyTask.Mappings
             CreateMap<Submission, SubmissionRead>().ReverseMap();
             CreateMap<Submission, SubmissionWrite>().ReverseMap();
             CreateMap<AnsweredQuestion, AnsweredQuestionWrite>().ReverseMap();
+            CreateMap<Weight, WeightRead>().ReverseMap();
+            CreateMap<WeightVersion, WeightVersionRead>().ReverseMap();
             CreateMap<Answer, AnswerRead>()
             .ForMember(dest => dest.QuestionId, opt => opt.MapFrom(src => src.QuestionId))
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))

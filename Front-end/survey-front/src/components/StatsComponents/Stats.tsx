@@ -4,7 +4,7 @@ import axios from "axios"
 import { submissionUrl } from "../../global/env"
 
 const Stats = () => {
-    const [projectId, setProjectId] = useState<number>(3)
+    const [projectId, setProjectId] = useState<number>(-1)
     const [submissions, setSubmissions] = useState<Submission[]>([])
 
     const getSubmissions = async () => {

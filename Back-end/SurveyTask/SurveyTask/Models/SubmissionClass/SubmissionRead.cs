@@ -19,5 +19,7 @@ namespace SurveyTask.Models.SubmissionClass
 
         public virtual ICollection<AnsweredQuestionWrite> AnsweredQuestions { get; set; }
 
+        public WeightVersionRead WeightVersion { get; set; }
+
     }
 }
