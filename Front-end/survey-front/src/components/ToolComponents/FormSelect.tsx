@@ -1,11 +1,11 @@
 import { useState } from "react";
-import ClientDropDown from "./ClientDropDown";
-import ProjectDropDown from "./ProjectDropDown";
+import ClientDropDown from "../FormComponents/ClientDropDown";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { clientUrl } from "../../global/env";
+import ProjectDropdown from "./ProjectDropdown";
 
-const FormSelect = () => {
+const FormSelect = ({ setSelectedProjectId, stats }: { setSelectedProjectId?: any; stats: boolean }) => {
 
     const [selectedClientId, setSelectedClientId] = useState<number>(-1)
 
@@ -23,11 +23,10 @@ const FormSelect = () => {
     });
 
     return (
-        <div className="dropDownPage">
-            <h1>Survey for evaluating clients</h1>
+        <>
             <ClientDropDown clients={data?.data} clientId={selectedClientId} setSelectedClient={setSelectedClientId} />
-            <ProjectDropDown selectedClient={selectedClientId} />
-        </div>
+            <ProjectDropdown selectedClient={selectedClientId} stats={stats} setProjectId={setSelectedProjectId} />
+        </>
     )
 }
 

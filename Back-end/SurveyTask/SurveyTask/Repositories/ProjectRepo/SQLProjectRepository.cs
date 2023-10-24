@@ -14,6 +14,11 @@ namespace SurveyTask.Repositories.ProjectRepo
             this.dbContext = dbContext;
         }
 
+        public async Task<List<Project>> GetAll()
+        {
+            return await dbContext.Projects.ToListAsync();
+        }
+
         public async Task<List<Project>> GetByClientId(int clientId)
         {
             return await dbContext.Projects.Where(x => x.ClientId == clientId).ToListAsync(); ;

@@ -48,7 +48,7 @@ const Form = () => {
     const handleAddAnswers = (answerId: number, questionId: number) => {
         const answerExists = answers.some((answer) => answer.questionId === questionId);
         if (!answerExists) {
-            var answeredQuestion: AnsweredQuestion = {
+            let answeredQuestion: AnsweredQuestion = {
                 answerId: answerId,
                 questionId: questionId
             }
@@ -58,29 +58,33 @@ const Form = () => {
 
     const handleSubmitForm = async (e: React.FormEvent) => {
         e.preventDefault()
-        var submission: Submission = {
+        const submission: Submission = {
             answeredQuestions: answers,
             projectId: Number(projectId)
         }
 
-        if (submission.projectId != -1 && submission.answeredQuestions.length === 3) {
-            var res = await sendSubmssion(submission)
-            if (res === false) {
-                setFormReponse("Something went wrong")
-            }
-            else if (res === 200) {
-                setFormReponse("Succesfull submission")
-            }
-            else {
-                console.log(res)
-                setFormReponse("Something went wrong")
-            }
-        }
-        else {
+        if (submission.projectId === -1 || submission.answeredQuestions.length !== 3) {
             setFormReponse("Please answer all questions")
+            return;
         }
 
+
+        const res = await sendSubmssion(submission)
+        console.log(res)
+
+        if (!res) {
+            setFormReponse("Something went wrong")
+            return
+        }
+
+        if (res === 200) {
+            setFormReponse("Succesfull submission")
+            return
+        }
+
+        setFormReponse("Something went wrong")
     }
+
 
     return (
         <div className="form">

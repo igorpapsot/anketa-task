@@ -54,14 +54,12 @@
 }
 
 .formError {
-    font-family: fantasy;
     color: rgb(217, 48, 48);
     font-size: large;
     font-weight: bold;
 }
 
 .formSuccess {
-    font-family: fantasy;
     color: rgb(29, 193, 29);
     font-size: large;
     font-weight: bold;
@@ -135,15 +133,28 @@
     font-weight: bolder;
     text-decoration: none;
     color: black;
-    font-family: fantasy;
 }
 
 .navLink:hover {
     cursor: pointer;
 }
 
-.navLinkHome {
+.navLinkLeft {
     margin-right: auto;
+}
+
+/*Stats*/
+
+.statsPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.statsButton {
+    margin: 20px;
+    padding: 3px 10px;
 }
 
 
@@ -153,19 +164,9 @@
     background-color: rgb(205, 204, 204);
     border: 1px rgb(115, 110, 110) solid;
     border-radius: 5px;
-    font-family: fantasy;
-}
-
-h1 {
-    font-family: fantasy;
-}
-
-h3 {
-    font-family: fantasy;
 }
 
 label {
-    font-family: fantasy;
     margin-top: 10px;
 }
 
@@ -175,6 +176,7 @@ body {
     margin-left: 0px;
     margin-right: 0px;
     margin-bottom: 20px;
+    font-family: fantasy;
 }
 
 .root {

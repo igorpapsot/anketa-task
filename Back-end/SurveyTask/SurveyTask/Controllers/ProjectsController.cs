@@ -34,5 +34,19 @@ namespace SurveyTask.Controllers
             return Ok(mapper.Map<List<ProjectRead>>(projects));
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var projects = await projectRepository.GetAll();
+
+            if (projects == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<List<ProjectRead>>(projects));
+
+        }
     }
 }
