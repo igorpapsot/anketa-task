@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SurveyTask.Data;
@@ -11,9 +12,11 @@ using SurveyTask.Data;
 namespace SurveyTask.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    partial class SurveyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231025084817_updating-weights")]
+    partial class updatingweights
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,15 +37,13 @@ namespace SurveyTask.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Order")
                         .HasColumnType("integer");
 
                     b.Property<int>("QuestionId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Type")
                         .HasColumnType("integer");
 
                     b.Property<int>("Value")
@@ -61,7 +62,6 @@ namespace SurveyTask.Migrations
                             Description = "1",
                             Order = 1,
                             QuestionId = 1,
-                            Type = 1,
                             Value = 1
                         },
                         new
@@ -70,7 +70,6 @@ namespace SurveyTask.Migrations
                             Description = "2",
                             Order = 2,
                             QuestionId = 1,
-                            Type = 1,
                             Value = 2
                         },
                         new
@@ -79,7 +78,6 @@ namespace SurveyTask.Migrations
                             Description = "3",
                             Order = 3,
                             QuestionId = 1,
-                            Type = 1,
                             Value = 3
                         },
                         new
@@ -88,7 +86,6 @@ namespace SurveyTask.Migrations
                             Description = "Too slow",
                             Order = 1,
                             QuestionId = 2,
-                            Type = 1,
                             Value = 1
                         },
                         new
@@ -97,7 +94,6 @@ namespace SurveyTask.Migrations
                             Description = "Just right",
                             Order = 2,
                             QuestionId = 2,
-                            Type = 1,
                             Value = 2
                         },
                         new
@@ -106,7 +102,6 @@ namespace SurveyTask.Migrations
                             Description = "Too fast",
                             Order = 3,
                             QuestionId = 2,
-                            Type = 1,
                             Value = 3
                         },
                         new
@@ -115,7 +110,6 @@ namespace SurveyTask.Migrations
                             Description = "1",
                             Order = 1,
                             QuestionId = 3,
-                            Type = 1,
                             Value = 1
                         },
                         new
@@ -124,7 +118,6 @@ namespace SurveyTask.Migrations
                             Description = "2",
                             Order = 2,
                             QuestionId = 3,
-                            Type = 1,
                             Value = 2
                         },
                         new
@@ -133,16 +126,7 @@ namespace SurveyTask.Migrations
                             Description = "3",
                             Order = 3,
                             QuestionId = 3,
-                            Type = 1,
                             Value = 3
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Order = 4,
-                            QuestionId = 4,
-                            Type = 0,
-                            Value = 0
                         });
                 });
 
@@ -153,9 +137,6 @@ namespace SurveyTask.Migrations
 
                     b.Property<int>("AnswerId")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("text");
 
                     b.HasKey("SubmissionId", "AnswerId");
 

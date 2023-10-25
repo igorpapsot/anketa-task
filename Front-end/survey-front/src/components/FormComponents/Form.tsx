@@ -1,4 +1,4 @@
-import InputField from "../InputComponents/InputField";
+import QuestionField from "../InputComponents/QuestionField";
 import FormButton from "./FormButton";
 import axios, { AxiosError } from "axios";
 import { questionUrl, submissionUrl } from "../../global/env";
@@ -45,15 +45,32 @@ const Form = () => {
         queryFn: getQuestions,
     });
 
-    const handleAddAnswers = (answerId: number, questionId: number) => {
-        const answerExists = answers.some((answer) => answer.questionId === questionId);
-        if (!answerExists) {
+    const handleAddAnswers = (answerId: number, questionId: number, text: string) => {
+        const answerForQuestionExists = answers.some((answer) => answer.questionId === questionId);
+        if (!answerForQuestionExists) {
             let answeredQuestion: AnsweredQuestion = {
                 answerId: answerId,
-                questionId: questionId
+                questionId: questionId,
+                text: text
             }
             setAnswers((prevState) => [...prevState, answeredQuestion]);
+            return
         }
+
+        const newAnswers = answers.map((a: AnsweredQuestion) => {
+            if (a.questionId == questionId) {
+                let answeredQuestion: AnsweredQuestion = {
+                    answerId: answerId,
+                    questionId: questionId,
+                    text: text
+                }
+                return answeredQuestion
+            }
+            return a
+
+        })
+
+        setAnswers(newAnswers)
     }
 
     const handleSubmitForm = async (e: React.FormEvent) => {
@@ -62,27 +79,28 @@ const Form = () => {
             answeredQuestions: answers,
             projectId: Number(projectId)
         }
+        console.log(submission)
 
-        if (submission.projectId === -1 || submission.answeredQuestions.length !== 3) {
+
+        if (submission.projectId === -1 || submission.answeredQuestions.length !== questions?.data.length) {
             setFormReponse("Please answer all questions")
             return;
         }
 
+        // const res = await sendSubmssion(submission)
+        // console.log(res)
 
-        const res = await sendSubmssion(submission)
-        console.log(res)
+        // if (!res) {
+        //     setFormReponse("Something went wrong")
+        //     return
+        // }
 
-        if (!res) {
-            setFormReponse("Something went wrong")
-            return
-        }
+        // if (res === 200) {
+        //     setFormReponse("Succesfull submission")
+        //     return
+        // }
 
-        if (res === 200) {
-            setFormReponse("Succesfull submission")
-            return
-        }
-
-        setFormReponse("Something went wrong")
+        // setFormReponse("Something went wrong")
     }
 
 
@@ -92,7 +110,7 @@ const Form = () => {
             <form onSubmit={(e) => handleSubmitForm(e)}>
                 {questions?.data
                     .map((q: Question) => {
-                        return <InputField question={q} key={q.id} addAnswer={handleAddAnswers}></InputField>
+                        return <QuestionField question={q} key={q.id} addAnswer={handleAddAnswers}></QuestionField>
                     })}
                 <FormButton projectId={Number(projectId)} />
             </form>

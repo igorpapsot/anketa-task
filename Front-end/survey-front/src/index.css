@@ -7,9 +7,18 @@
     margin: 20px;
 }
 
-.inputField {
+.radioInput {
     display: grid;
     grid-template-columns: 40% 20% 20% 20%;
+    background-color: white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.textInput {
+    display: grid;
+    grid-template-columns: 40% 60%;
     background-color: white;
     margin: 10px;
     padding: 10px;
@@ -27,6 +36,12 @@
 
 .choiceButton {
     align-self: center;
+}
+
+.textChoice {
+    align-self: center;
+    width: 70%;
+    height: 50%;
 }
 
 .submitBtn {

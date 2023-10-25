@@ -176,6 +176,16 @@ namespace SurveyTask.Data
                     Index = 3,
                     Order = 3,
                     DeletedAt = null
+                },
+                new Question()
+                {
+                    Id = 4,
+                    Description = "Would you like to add something?",
+                    Required = false,
+                    Type = 0,
+                    Index = 4,
+                    Order = 4,
+                    DeletedAt = null
                 }
             };
 
@@ -189,7 +199,8 @@ namespace SurveyTask.Data
                     Description = "1",
                     Value = 1,
                     DeletedAt = null,
-                    Order = 1
+                    Order = 1,
+                    Type = EAnswerType.Radio
                 },
 
                 new Answer()
@@ -199,7 +210,8 @@ namespace SurveyTask.Data
                     Description = "2",
                     Value = 2,
                     DeletedAt = null,
-                    Order = 2
+                    Order = 2,
+                    Type = EAnswerType.Radio
                 },
 
                 new Answer()
@@ -209,7 +221,8 @@ namespace SurveyTask.Data
                     Description = "3",
                     Value = 3,
                     DeletedAt = null,
-                    Order = 3
+                    Order = 3,
+                    Type = EAnswerType.Radio
                 },
 
                 new Answer()
@@ -219,7 +232,8 @@ namespace SurveyTask.Data
                     Description = "Too slow",
                     Value = 1,
                     DeletedAt = null,
-                    Order = 1
+                    Order = 1,
+                    Type = EAnswerType.Radio
                 },
 
                 new Answer()
@@ -229,7 +243,8 @@ namespace SurveyTask.Data
                     Description = "Just right",
                     Value = 2,
                     DeletedAt = null,
-                    Order = 2
+                    Order = 2,
+                    Type = EAnswerType.Radio
                 },
 
                 new Answer()
@@ -239,7 +254,8 @@ namespace SurveyTask.Data
                     Description = "Too fast",
                     Value = 3,
                     DeletedAt = null,
-                    Order = 3
+                    Order = 3,
+                    Type = EAnswerType.Radio
                 },
 
                 new Answer()
@@ -249,7 +265,8 @@ namespace SurveyTask.Data
                     Description = "1",
                     Value = 1,
                     DeletedAt = null,
-                    Order = 1
+                    Order = 1,
+                    Type = EAnswerType.Radio
                 },
 
                 new Answer()
@@ -259,7 +276,8 @@ namespace SurveyTask.Data
                     Description = "2",
                     Value = 2,
                     DeletedAt = null,
-                    Order = 2
+                    Order = 2,
+                    Type = EAnswerType.Radio
                 },
                 new Answer()
                 {
@@ -268,7 +286,18 @@ namespace SurveyTask.Data
                     Description = "3",
                     Value = 3,
                     DeletedAt = null,
-                    Order = 3
+                    Order = 3,
+                    Type = EAnswerType.Radio
+                },
+                new Answer()
+                {
+                    QuestionId = 4,
+                    Id = 10,
+                    //Description = "3",
+                    Value = 0,
+                    DeletedAt = null,
+                    Order = 4,
+                    Type = EAnswerType.Text
                 },
             };
 
@@ -287,7 +316,6 @@ namespace SurveyTask.Data
                     DeletedAt= null
                 },
 
-
                 new Weight() {
                     Id = 2,
                     Value = 2,
@@ -296,12 +324,87 @@ namespace SurveyTask.Data
                     DeletedAt= null
                 },
 
-
                 new Weight() {
                     Id = 3,
                     Value = 3,
                     WeightVersionId = 3,
                     Index = 3,
+                    DeletedAt= null
+                },
+
+                new Weight() {
+                    Id = 4,
+                    Value = 0,
+                    WeightVersionId = 3,
+                    Index = 4,
+                    DeletedAt= null
+                },
+
+
+
+                new Weight() {
+                    Id = 5,
+                    Value = 2,
+                    WeightVersionId = 1,
+                    Index = 1,
+                    DeletedAt= null
+                },
+
+                new Weight() {
+                    Id = 6,
+                    Value = 2,
+                    WeightVersionId = 1,
+                    Index = 2,
+                    DeletedAt= null
+                },
+
+                new Weight() {
+                    Id = 7,
+                    Value = 2,
+                    WeightVersionId = 1,
+                    Index = 3,
+                    DeletedAt= null
+                },
+
+                new Weight() {
+                    Id = 8,
+                    Value = 0,
+                    WeightVersionId = 1,
+                    Index = 4,
+                    DeletedAt= null
+                },
+
+                
+                
+                new Weight() {
+                    Id = 9,
+                    Value = 2,
+                    WeightVersionId = 2,
+                    Index = 1,
+                    DeletedAt= null
+                },
+
+                new Weight() {
+                    Id = 10,
+                    Value = 2,
+                    WeightVersionId = 2,
+                    Index = 2,
+                    DeletedAt= null
+                },
+
+                new Weight() {
+                    Id = 11,
+                    Value = 1,
+                    WeightVersionId = 2,
+                    Index = 3,
+                    DeletedAt= null
+                },
+
+                new Weight() {
+                    Id = 12,
+                    Value = 0,
+                    WeightVersionId = 2,
+                    Index = 4,
                     DeletedAt= null
                 },
             };

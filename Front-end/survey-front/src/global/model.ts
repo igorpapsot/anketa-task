@@ -5,6 +5,7 @@ interface Answer {
     value: number;
     order: number;
     deletedAt: any;
+    type: number;
 }
 
 interface Question {
@@ -43,6 +44,7 @@ interface AnsweredQuestion {
     questionId: number
     answerId: number
     submissionId?: number
+    text?: string
 }
 
 interface Grade {

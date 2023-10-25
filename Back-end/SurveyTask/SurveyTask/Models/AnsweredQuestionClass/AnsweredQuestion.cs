@@ -9,6 +9,8 @@ namespace SurveyTask.Models.AnsweredQuestionClass
 
         public int SubmissionId { get; set; }
 
+        public string? Text {  get; set; } 
+
 
 
         public Answer Answer { get; set; }

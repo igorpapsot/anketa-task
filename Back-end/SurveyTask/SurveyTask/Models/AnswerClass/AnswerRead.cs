@@ -16,5 +16,7 @@ namespace SurveyTask.Models.AnswerClass
 
         public DateTime? DeletedAt { get; set; }
 
+        public EAnswerType Type { get; set; }
+
     }
 }

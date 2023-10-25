@@ -18,14 +18,6 @@ const Stats = () => {
         setBtnClicked(true)
     };
 
-    // useEffect(() => {
-    //     if (projectId === -1) {
-    //         return;
-    //     }
-
-    //     getGrades()
-    // }, [projectId])
-
     const showStatsHandler = () => {
         getGrades()
     }
@@ -51,7 +43,6 @@ const Stats = () => {
                 <table className="gradeTable">
                     <thead>
                         <tr>
-                            {/* <th>Id</th> */}
                             <th>Weight version</th>
                             <th>Grade</th>
                         </tr>
@@ -59,7 +50,6 @@ const Stats = () => {
                     <tbody>
                         {grades.map((g: Grade) => (
                             <tr key={g.submissionId}>
-                                {/* <td>{g.submissionId}</td> */}
                                 <td>{g.weightVersion}</td>
                                 <td>{g.value}</td>
                             </tr>
