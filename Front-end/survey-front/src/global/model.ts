@@ -44,3 +44,9 @@ interface AnsweredQuestion {
     answerId: number
     submissionId?: number
 }
+
+interface Grade {
+    submissionId: number
+    value: number
+    weightVersion: number
+}

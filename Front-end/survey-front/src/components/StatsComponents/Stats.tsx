@@ -1,39 +1,79 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import FormSelect from "../ToolComponents/FormSelect"
 import axios from "axios"
-import { submissionUrl } from "../../global/env"
+import { gradesUrl } from "../../global/env"
 
 const Stats = () => {
     const [projectId, setProjectId] = useState<number>(-1)
-    const [submissions, setSubmissions] = useState<Submission[]>([])
+    const [grades, setGrades] = useState<Grade[]>([])
+    const [btnClicked, setBtnClicked] = useState<boolean>(false)
 
-    const getSubmissions = async () => {
-        console.log("Getting projects...")
-        let res = await axios.get(submissionUrl + projectId);
-
+    const getGrades = async () => {
+        console.log("Getting submission grades...")
+        let res = await axios.get(gradesUrl + projectId);
+        console.log(res)
         if (res && res.status == 200) {
-            setSubmissions(res.data)
+            setGrades(res.data)
         }
+        setBtnClicked(true)
     };
 
-    useEffect(() => {
-        if (projectId === -1) {
-            return;
-        }
+    // useEffect(() => {
+    //     if (projectId === -1) {
+    //         return;
+    //     }
 
-        getSubmissions()
-    }, [projectId])
+    //     getGrades()
+    // }, [projectId])
+
+    const showStatsHandler = () => {
+        getGrades()
+    }
+
+    const getAverageGrade = () => {
+        let avg = 0
+        grades.forEach(grade => {
+            avg = avg + grade.value
+        });
+        avg = avg / grades.length
+        return avg.toFixed(2)
+    }
 
     return (
-        <div className="dropDownPage">
-            {projectId}
+        <div className="statsPage">
             <FormSelect stats={true} setSelectedProjectId={setProjectId} />
-            <button className="button statsButton">Show stats</button>
-            <ul>
-                {submissions.map((s: Submission) => {
-                    return <li>{s.projectId} {s.answeredQuestions.toString()}</li>
-                })}
-            </ul>
+            <button className="button statsButton" onClick={() => showStatsHandler()}>Show stats</button>
+            {/* If project is selected, there is no submissions and button for stats is clicked*/}
+            {projectId !== -1 && grades.length === 0 && btnClicked ? <p>No submissions for this project found</p> : <></>}
+
+            {/* If project is selected, there are submissions and button for stats is clicked*/}
+            {projectId !== -1 && grades.length !== 0 && btnClicked ? (
+                <table className="gradeTable">
+                    <thead>
+                        <tr>
+                            {/* <th>Id</th> */}
+                            <th>Weight version</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {grades.map((g: Grade) => (
+                            <tr key={g.submissionId}>
+                                {/* <td>{g.submissionId}</td> */}
+                                <td>{g.weightVersion}</td>
+                                <td>{g.value}</td>
+                            </tr>
+                        ))}
+                        <tr>
+                            <td className="average-row">Average</td>
+                            <td className="average-row">{getAverageGrade()}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            ) : (
+                <></>
+            )}
+
         </div>
 
     )

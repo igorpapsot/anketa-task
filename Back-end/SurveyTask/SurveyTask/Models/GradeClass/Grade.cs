@@ -5,5 +5,7 @@
         public int SubmissionId { get; set; }
 
         public Double Value { get; set; }
+
+        public int WeightVersion { get; set; }
     }
 }

@@ -8,4 +8,6 @@ const questionUrl = baseUrl + "api/Questions/"
 
 const submissionUrl = baseUrl + "api/Submissions/"
 
-export { clientUrl, projectUrl, questionUrl, submissionUrl }
+const gradesUrl = baseUrl + "api/Submissions/Grades/"
+
+export { clientUrl, projectUrl, questionUrl, submissionUrl, gradesUrl }

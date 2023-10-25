@@ -148,13 +148,47 @@
 .statsPage {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
 .statsButton {
     margin: 20px;
     padding: 3px 10px;
+}
+
+.gradeTable {
+    width: 70vw;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.gradeTable th,
+.gradeTable td {
+    border: 1px solid rgb(115, 110, 110);
+    padding: 8px;
+    text-align: left;
+}
+
+.gradeTable th {
+    background-color: #f2f2f2;
+}
+
+.gradeTable tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.gradeTable tbody tr:nth-child(odd) {
+    background-color: rgb(205, 204, 204);
+}
+
+.gradeTable tbody tr:hover {
+    background-color: #e0e0e0;
+}
+
+.gradeTable .average-row {
+    font-weight: bold;
+    border: 2px solid rgb(115, 110, 110);
 }
 
 

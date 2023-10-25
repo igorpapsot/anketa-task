@@ -30,7 +30,8 @@ namespace SurveyTask.Services.Submissions
                 var answers = await answerRepository.GetBySubmissionId(submission.Id);
                 var grade = new Grade()
                 {
-                    SubmissionId = submission.Id
+                    SubmissionId = submission.Id,
+                    WeightVersion = submission.WeightVersion.Id
                 };
                 foreach (Answer answer in answers)
                 {
