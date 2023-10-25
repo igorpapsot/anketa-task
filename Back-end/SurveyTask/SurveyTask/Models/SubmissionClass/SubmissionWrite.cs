@@ -8,6 +8,7 @@ namespace SurveyTask.Models.SubmissionClass
     {
         public int ProjectId { get; set; }
 
+        public double? OriginalScore { get; set; }
 
         public virtual ICollection<AnsweredQuestionWrite> AnsweredQuestions { get; set; }
     }

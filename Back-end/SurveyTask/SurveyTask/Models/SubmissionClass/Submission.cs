@@ -19,6 +19,8 @@ namespace SurveyTask.Models.SubmissionClass
 
         public DateTime? DeletedAt { get; set; }
 
+        public double OriginalScore { get; set; }
+
 
         public virtual ICollection<AnsweredQuestion> AnsweredQuestions { get; set; }
 

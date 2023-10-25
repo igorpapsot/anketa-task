@@ -17,6 +17,9 @@ namespace SurveyTask.Models.SubmissionClass
             get; set;
         }
 
+        public double? OriginalScore { get; set; }
+
+
         public virtual ICollection<AnsweredQuestionWrite> AnsweredQuestions { get; set; }
 
         public WeightVersionRead WeightVersion { get; set; }

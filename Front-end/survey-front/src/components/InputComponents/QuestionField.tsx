@@ -12,7 +12,6 @@ const QuestionField = ({ question, addAnswer }: { question: Question; addAnswer:
     }
 
     const setTextHandler = (id: number, text: string) => {
-        console.log(55)
         addAnswer(id, question.id, text)
     }
 

@@ -79,7 +79,7 @@ const Form = () => {
             answeredQuestions: answers,
             projectId: Number(projectId)
         }
-        console.log(submission)
+        // console.log(submission)
 
 
         if (submission.projectId === -1 || submission.answeredQuestions.length !== questions?.data.length) {
@@ -87,20 +87,20 @@ const Form = () => {
             return;
         }
 
-        // const res = await sendSubmssion(submission)
-        // console.log(res)
+        const res = await sendSubmssion(submission)
+        console.log(res)
 
-        // if (!res) {
-        //     setFormReponse("Something went wrong")
-        //     return
-        // }
+        if (!res) {
+            setFormReponse("Something went wrong")
+            return
+        }
 
-        // if (res === 200) {
-        //     setFormReponse("Succesfull submission")
-        //     return
-        // }
+        if (res === 200) {
+            setFormReponse("Succesfull submission")
+            return
+        }
 
-        // setFormReponse("Something went wrong")
+        setFormReponse("Something went wrong")
     }
 
 

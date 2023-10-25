@@ -44,10 +44,11 @@ namespace SurveyTask.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSubmission([FromBody] SubmissionWrite submissionReq)
         {
-            var submission = mapper.Map<Submission>(submissionReq);
+            /*var submission = mapper.Map<Submission>(submissionReq);
             submission.WeightVersionId = weightVersionRepository.GetCurrentVersion().Result.Id;
 
-            submission = await submissionRepository.Create(submission);
+            submission = await submissionRepository.Create(submission);*/
+            var submission = await submissionService.CreateSubmission(submissionReq);
 
             return Ok(mapper.Map<SubmissionRead>(submission));
         }
