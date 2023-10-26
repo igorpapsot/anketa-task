@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SurveyTask.Models.AnsweredQuestionClass;
 using SurveyTask.Models.SubmissionClass;
 using SurveyTask.Repositories.SubmissionRepo;
 using SurveyTask.Repositories.WeightVersionRepo;
@@ -11,6 +10,7 @@ namespace SurveyTask.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SubmissionsController : ControllerBase
     {
         private readonly IMapper mapper;
@@ -29,6 +29,7 @@ namespace SurveyTask.Controllers
 
         [HttpGet]
         [Route("{projectId:int}")]
+/*        [Authorize(Roles = "Admin")]*/
         public async Task<IActionResult> GetByProjectId([FromRoute] int projectId)
         {
             var submissions = await submissionRepository.GetByProjectId(projectId);
@@ -42,12 +43,9 @@ namespace SurveyTask.Controllers
         }
 
         [HttpPost]
+        /*[Authorize(Roles = "Admin,User")]*/
         public async Task<IActionResult> CreateSubmission([FromBody] SubmissionWrite submissionReq)
         {
-            /*var submission = mapper.Map<Submission>(submissionReq);
-            submission.WeightVersionId = weightVersionRepository.GetCurrentVersion().Result.Id;
-
-            submission = await submissionRepository.Create(submission);*/
             var submission = await submissionService.CreateSubmission(submissionReq);
 
             return Ok(mapper.Map<SubmissionRead>(submission));
@@ -55,6 +53,7 @@ namespace SurveyTask.Controllers
 
         [HttpGet]
         [Route("Grades/{projectId}")]
+/*        [Authorize(Roles = "Admin")]*/
         public async Task<IActionResult> GetGrades([FromRoute] int projectId)
         {
             var grades = await submissionService.GetGrades(projectId);

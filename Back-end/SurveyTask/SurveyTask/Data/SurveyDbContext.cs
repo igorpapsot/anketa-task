@@ -415,7 +415,7 @@ namespace SurveyTask.Data
                 new WeightVersion()
                 {
                     Id = 1,
-                    VersionName = "Initial version",
+                    VersionName = "1st version",
                     VersionNumber = 1,
                     DeletedAt = null
                 },
@@ -423,7 +423,7 @@ namespace SurveyTask.Data
                 new WeightVersion()
                 {
                     Id = 2,
-                    VersionName = "Second version",
+                    VersionName = "2nd version",
                     VersionNumber = 2,
                     DeletedAt = null
                 },
@@ -431,7 +431,7 @@ namespace SurveyTask.Data
                 new WeightVersion()
                 {
                     Id = 3,
-                    VersionName = "Third version",
+                    VersionName = "3rd version",
                     VersionNumber = 3,
                     DeletedAt = null
                 },

@@ -51,4 +51,5 @@ interface Grade {
     submissionId: number
     value: number
     weightVersion: number
+    originalScore: number
 }

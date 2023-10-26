@@ -46,6 +46,7 @@ const Form = () => {
     });
 
     const handleAddAnswers = (answerId: number, questionId: number, text: string) => {
+        //Check if answer for question exists and if not, add new answer
         const answerForQuestionExists = answers.some((answer) => answer.questionId === questionId);
         if (!answerForQuestionExists) {
             let answeredQuestion: AnsweredQuestion = {
@@ -57,6 +58,7 @@ const Form = () => {
             return
         }
 
+        //Iterate through existing answers. If new answer exists return it, if not return existing
         const newAnswers = answers.map((a: AnsweredQuestion) => {
             if (a.questionId == questionId) {
                 let answeredQuestion: AnsweredQuestion = {
@@ -73,18 +75,36 @@ const Form = () => {
         setAnswers(newAnswers)
     }
 
+
+
     const handleSubmitForm = async (e: React.FormEvent) => {
         e.preventDefault()
+
+        const requiredAnswers: AnsweredQuestion[] = []
+        const requiredQuestions: Question[] = []
+
+        //Check if answers exist for all required questions 
+        questions?.data.forEach((question: Question) => {
+            if (question.type === 1) {
+                requiredQuestions.push(question)
+                answers.forEach((answer: AnsweredQuestion) => {
+                    if (answer.questionId === question.id) {
+                        requiredAnswers.push(answer)
+                    }
+                });
+            }
+        });
+        const requiredAnswersExist = requiredAnswers.length === requiredQuestions.length
+
+        if (Number(projectId) === -1 || !requiredAnswersExist) {
+            setFormReponse("Please answer all required questions")
+            return;
+        }
+
+        //Send submission post request to backend and verify response
         const submission: Submission = {
             answeredQuestions: answers,
             projectId: Number(projectId)
-        }
-        // console.log(submission)
-
-
-        if (submission.projectId === -1 || submission.answeredQuestions.length !== questions?.data.length) {
-            setFormReponse("Please answer all questions")
-            return;
         }
 
         const res = await sendSubmssion(submission)

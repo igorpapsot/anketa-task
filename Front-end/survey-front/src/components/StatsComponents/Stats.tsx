@@ -31,6 +31,15 @@ const Stats = () => {
         return avg.toFixed(2)
     }
 
+    const getAverageOriginalGrade = () => {
+        let avg = 0
+        grades.forEach(grade => {
+            avg = avg + grade.originalScore
+        });
+        avg = avg / grades.length
+        return avg.toFixed(2)
+    }
+
     return (
         <div className="statsPage">
             <FormSelect stats={true} setSelectedProjectId={setProjectId} />
@@ -44,6 +53,7 @@ const Stats = () => {
                     <thead>
                         <tr>
                             <th>Weight version</th>
+                            <th>Original grade</th>
                             <th>Grade</th>
                         </tr>
                     </thead>
@@ -51,11 +61,13 @@ const Stats = () => {
                         {grades.map((g: Grade) => (
                             <tr key={g.submissionId}>
                                 <td>{g.weightVersion}</td>
+                                <td>{g.originalScore}</td>
                                 <td>{g.value}</td>
                             </tr>
                         ))}
                         <tr>
                             <td className="average-row">Average</td>
+                            <td className="average-row">{getAverageOriginalGrade()}</td>
                             <td className="average-row">{getAverageGrade()}</td>
                         </tr>
                     </tbody>

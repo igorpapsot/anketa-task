@@ -7,5 +7,7 @@
         public Double Value { get; set; }
 
         public int? WeightVersion { get; set; }
+
+        public Double OriginalScore { get; set; }
     }
 }

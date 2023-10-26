@@ -12,8 +12,8 @@ using SurveyTask.Data;
 namespace SurveyTask.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    [Migration("20231025132525_original-score")]
-    partial class originalscore
+    [Migration("20231026084229_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -497,19 +497,19 @@ namespace SurveyTask.Migrations
                         new
                         {
                             Id = 1,
-                            VersionName = "Initial version",
+                            VersionName = "1st version",
                             VersionNumber = 1
                         },
                         new
                         {
                             Id = 2,
-                            VersionName = "Second version",
+                            VersionName = "2nd version",
                             VersionNumber = 2
                         },
                         new
                         {
                             Id = 3,
-                            VersionName = "Third version",
+                            VersionName = "3rd version",
                             VersionNumber = 3
                         });
                 });

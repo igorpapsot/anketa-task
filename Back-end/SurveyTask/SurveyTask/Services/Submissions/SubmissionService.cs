@@ -61,7 +61,8 @@ namespace SurveyTask.Services.Submissions
                 var grade = new Grade()
                 {
                     SubmissionId = submission.Id,
-                    WeightVersion = submission.WeightVersion.Id
+                    WeightVersion = submission.WeightVersion.Id,
+                    OriginalScore = submission.OriginalScore
                 };
                 foreach (Answer answer in answers)
                 {

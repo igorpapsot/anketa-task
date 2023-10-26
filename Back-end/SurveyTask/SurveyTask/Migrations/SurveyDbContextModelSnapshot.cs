@@ -494,19 +494,19 @@ namespace SurveyTask.Migrations
                         new
                         {
                             Id = 1,
-                            VersionName = "Initial version",
+                            VersionName = "1st version",
                             VersionNumber = 1
                         },
                         new
                         {
                             Id = 2,
-                            VersionName = "Second version",
+                            VersionName = "2nd version",
                             VersionNumber = 2
                         },
                         new
                         {
                             Id = 3,
-                            VersionName = "Third version",
+                            VersionName = "3rd version",
                             VersionNumber = 3
                         });
                 });
