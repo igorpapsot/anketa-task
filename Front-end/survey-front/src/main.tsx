@@ -18,15 +18,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Login />
+      },
+      {
+        path: "login",
+        element: <Login />
+      },
+      {
+        path: "survey",
         element: <SurveySelect />
       },
       {
         path: "survey/:projectId",
         element: <Form />,
-      },
-      {
-        path: "login",
-        element: <Login />,
       },
       {
         path: "register",
@@ -39,7 +43,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -5,6 +5,8 @@ import { questionUrl, submissionUrl } from "../../global/env";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/Auth";
+import ErrorPage from "../ToolComponents/ErrorPage";
 
 export const sendSubmssion = async (
     submission: Submission
@@ -31,6 +33,14 @@ const Form = () => {
     const [formReponse, setFormReponse] = useState<string>("")
     //const projectId = useSelector((state: RootState) => state.project.projectId)
     const { projectId } = useParams()
+
+    const auth = useAuth()
+
+    if (!auth.getLogged()) {
+        return (
+            <ErrorPage errorMessageProp={NOT_AUTHORIZED} />
+        )
+    }
 
     const getQuestions = async () => {
         console.log("Getting questions...")

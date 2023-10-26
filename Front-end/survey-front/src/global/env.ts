@@ -1,13 +1,17 @@
-const baseUrl = "https://localhost:7279/"
+const baseUrl = "https://localhost:7279/api/"
 
-const clientUrl = baseUrl + "api/Clients/"
+const clientUrl = baseUrl + "Clients/"
 
-const projectUrl = baseUrl + "api/Projects/"
+const projectUrl = baseUrl + "Projects/"
 
-const questionUrl = baseUrl + "api/Questions/"
+const questionUrl = baseUrl + "Questions/"
 
-const submissionUrl = baseUrl + "api/Submissions/"
+const submissionUrl = baseUrl + "Submissions/"
 
-const gradesUrl = baseUrl + "api/Submissions/Grades/"
+const gradesUrl = baseUrl + "Submissions/Grades/"
 
-export { clientUrl, projectUrl, questionUrl, submissionUrl, gradesUrl }
+const loginUrl = baseUrl + "Auth/Login"
+
+const registerUrl = baseUrl + "Auth/Register"
+
+export { clientUrl, projectUrl, questionUrl, submissionUrl, gradesUrl, loginUrl, registerUrl }

@@ -31,7 +31,7 @@ const ProjectDropDown = ({ selectedClient, stats, setProjectId }: {
 
     const selectHandler = (e: string) => {
         if (!stats) {
-            navigate("survey/" + e)
+            navigate("/survey/" + e)
             return
         }
         setProjectId(e)

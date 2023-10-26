@@ -2,11 +2,21 @@ import { useState } from "react"
 import FormSelect from "../ToolComponents/FormSelect"
 import axios from "axios"
 import { gradesUrl } from "../../global/env"
+import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/Auth"
+import ErrorPage from "../ToolComponents/ErrorPage"
 
 const Stats = () => {
     const [projectId, setProjectId] = useState<number>(-1)
     const [grades, setGrades] = useState<Grade[]>([])
     const [btnClicked, setBtnClicked] = useState<boolean>(false)
+
+    const auth = useAuth()
+
+    if (!auth.getLogged()) {
+        return (
+            <ErrorPage errorMessageProp={NOT_AUTHORIZED} />
+        )
+    }
 
     const getGrades = async () => {
         console.log("Getting submission grades...")

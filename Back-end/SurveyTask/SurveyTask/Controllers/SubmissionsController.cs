@@ -10,7 +10,7 @@ namespace SurveyTask.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+/*    [Authorize]*/
     public class SubmissionsController : ControllerBase
     {
         private readonly IMapper mapper;

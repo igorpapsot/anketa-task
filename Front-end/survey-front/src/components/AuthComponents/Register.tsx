@@ -1,19 +1,77 @@
 import { useState } from "react"
 import AuthInput from "./AuthInput"
+import axios, { AxiosError } from "axios";
+import { registerUrl } from "../../global/env";
+import { useNavigate } from "react-router-dom";
+
+const registerRequest = async (username: string, password: string) => {
+    try {
+        const response = await axios.post(registerUrl, {
+            username: username,
+            password: password
+        });
+        return response.status;
+    } catch (e) {
+        let error = e as AxiosError;
+        if (error.response) {
+            return error.response.status;
+        } else {
+            return false;
+        }
+    }
+}
+
+const SUCCESFULL_REGISTER = "Succesfull register"
+const UNSUCCESFULL_REGISTER = "Wrong username or password"
+const FILL_OUT_FIELDS = "Please fill out all fields"
+const PASSWORDS_NOT_MATCHING = "Passwords dont match"
 
 const Register = () => {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [email, setEmail] = useState("")
+    const [repeatPassword, setRepeatPassword] = useState("")
+    const [error, setError] = useState("")
+
+    const navigate = useNavigate()
+
+    const registerHandler = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (username == "" || password == "") {
+            setError(FILL_OUT_FIELDS)
+            return
+        }
+
+        if (password !== repeatPassword) {
+            setError(PASSWORDS_NOT_MATCHING)
+            return
+        }
+
+        const res = await registerRequest(username, password)
+        console.log(res)
+
+        if (!res) {
+            setError(UNSUCCESFULL_REGISTER)
+            return
+        }
+
+        if (res === 200) {
+            setError(SUCCESFULL_REGISTER)
+            navigate("/login")
+            return
+        }
+
+        setError(UNSUCCESFULL_REGISTER)
+    }
 
     return (
-        <form className="authPage">
-            <AuthInput label="Email" state={email} setState={setEmail} type="email"></AuthInput>
-            <AuthInput label="Username" state={username} setState={setUsername} type="text"></AuthInput>
+        <form className="authPage" onSubmit={(e) => registerHandler(e)}>
+            <label className={error === SUCCESFULL_REGISTER ? "formSuccess" : "formError"}>{error}</label>
+            <AuthInput label="Username" state={username} setState={setUsername} type="email"></AuthInput>
             <AuthInput label="Password" state={password} setState={setPassword} type="password"></AuthInput>
+            <AuthInput label="Repeat password" state={repeatPassword} setState={setRepeatPassword} type="password"></AuthInput>
             <br />
-            <button className="button authButton">Login</button>
+            <button type="submit" className="button authButton">Register</button>
         </form>
     )
 }

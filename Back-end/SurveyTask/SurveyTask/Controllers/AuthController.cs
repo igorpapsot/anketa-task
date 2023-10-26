@@ -33,15 +33,12 @@ namespace SurveyTask.Controllers
 
             if(result.Succeeded)
             {
-                if (registerRequestDTO.Role != null)
-                {
-                    result = await userManager.AddToRoleAsync(user, registerRequestDTO.Role);
+                result = await userManager.AddToRoleAsync(user, "User");
 
-                    if (result.Succeeded)
-                    {
-                        return Ok("Succesfully registered");
-                    }
-                }              
+                if (result.Succeeded)
+                {
+                    return Ok("Succesfully registered");
+                }
             }
 
             return BadRequest("Something went wrong");
@@ -64,11 +61,11 @@ namespace SurveyTask.Controllers
                     if(roles != null)
                     {
                         var jwt = tokenRepository.CreateJWTToken(user, roles.First());
-                        var response = new LoginResponseDTO
+/*                        var response = new LoginResponseDTO
                         {
                             JwtToken = jwt
-                        };
-                        return Ok(response);
+                        };*/
+                        return Ok(jwt);
                     }
                 }
             }

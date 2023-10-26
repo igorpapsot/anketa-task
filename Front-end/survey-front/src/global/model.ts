@@ -53,3 +53,10 @@ interface Grade {
     weightVersion: number
     originalScore: number
 }
+
+interface Jwt {
+    username: string,
+    role: number,
+    id: string,
+    exp: number
+}
