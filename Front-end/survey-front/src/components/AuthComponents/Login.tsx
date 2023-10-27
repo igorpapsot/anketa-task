@@ -1,5 +1,5 @@
 import { useState } from "react"
-import AuthInput from "./AuthInput"
+import TextInput from "../ToolComponents/TextInput"
 import axios, { AxiosError } from "axios";
 import { loginUrl } from "../../global/env";
 import { useAuth } from "../ToolComponents/Auth";
@@ -63,8 +63,8 @@ const Login = () => {
     return (
         <form className="authPage" onSubmit={(e) => loginHandler(e)}>
             <label className={error === SUCCESFULL_LOGIN ? "formSuccess" : "formError"}>{error}</label>
-            <AuthInput label="Username" state={username} setState={setUsername} type="email"></AuthInput>
-            <AuthInput label="Password" state={password} setState={setPassword} type="password"></AuthInput>
+            <TextInput label="Username" state={username} setState={setUsername} type="email"></TextInput>
+            <TextInput label="Password" state={password} setState={setPassword} type="password"></TextInput>
             <br />
             <button type="submit" className="button authButton">Login</button>
         </form>

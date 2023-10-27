@@ -66,3 +66,11 @@ interface WeightVersion {
     versionName: string
     deletedAt: string | null
 }
+
+interface Weight {
+    id?: number
+    index: number
+    value: number
+    deletedAt?: string | null
+    weightVersionId?: number
+}

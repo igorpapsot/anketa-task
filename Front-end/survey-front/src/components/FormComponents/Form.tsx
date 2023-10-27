@@ -86,7 +86,6 @@ const Form = () => {
                 return answeredQuestion
             }
             return a
-
         })
 
         setAnswers(newAnswers)

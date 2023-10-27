@@ -156,6 +156,31 @@
     box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(190, 211, 251, 0.25), 0px 0px 0px 3.5px rgba(62, 66, 74, 0.5);
 }
 
+/*Weight versions*/
+
+.weightVersions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.weightListItem {
+    border: 1px solid rgb(115, 110, 110);
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.weightList {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.weightWidth {
+    width: 20%;
+}
+
 /*Nav*/
 
 .navHeader {

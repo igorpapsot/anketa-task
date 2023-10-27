@@ -1,4 +1,4 @@
-const AuthInput = ({ label, state, setState, type }: { label: string; state: string; setState: any; type: string }) => {
+const TextInput = ({ label, state, setState, type }: { label: string; state: string; setState: any; type: string }) => {
     return (
         <>
             <label>{label}</label>
@@ -7,4 +7,4 @@ const AuthInput = ({ label, state, setState, type }: { label: string; state: str
     )
 }
 
-export default AuthInput
+export default TextInput

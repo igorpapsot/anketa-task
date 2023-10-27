@@ -13,5 +13,3 @@ const Question = ({ question }: { question: Question }) => {
 }
 
 export default Question;
-
-{/* <span className="tooltip">*</span> */ }

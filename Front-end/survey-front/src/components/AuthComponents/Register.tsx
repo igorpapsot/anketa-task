@@ -1,5 +1,5 @@
 import { useState } from "react"
-import AuthInput from "./AuthInput"
+import TextInput from "../ToolComponents/TextInput"
 import axios, { AxiosError } from "axios";
 import { registerUrl } from "../../global/env";
 import { useNavigate } from "react-router-dom";
@@ -67,9 +67,9 @@ const Register = () => {
     return (
         <form className="authPage" onSubmit={(e) => registerHandler(e)}>
             <label className={error === SUCCESFULL_REGISTER ? "formSuccess" : "formError"}>{error}</label>
-            <AuthInput label="Username" state={username} setState={setUsername} type="email"></AuthInput>
-            <AuthInput label="Password" state={password} setState={setPassword} type="password"></AuthInput>
-            <AuthInput label="Repeat password" state={repeatPassword} setState={setRepeatPassword} type="password"></AuthInput>
+            <TextInput label="Username" state={username} setState={setUsername} type="email"></TextInput>
+            <TextInput label="Password" state={password} setState={setPassword} type="password"></TextInput>
+            <TextInput label="Repeat password" state={repeatPassword} setState={setRepeatPassword} type="password"></TextInput>
             <br />
             <button type="submit" className="button authButton">Register</button>
         </form>

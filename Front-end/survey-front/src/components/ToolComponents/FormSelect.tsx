@@ -2,8 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { clientUrl } from "../../global/env";
-import ProjectDropdown from "./ProjectDropdown";
-import ClientDropDown from "./ClientDropDown";
+import ProjectDropdown from "../FormComponents/ProjectDropdown";
+import ClientDropDown from "../FormComponents/ClientDropDown";
 import { useAuth } from "./Auth";
 
 const FormSelect = ({ setSelectedProjectId, stats }: { setSelectedProjectId?: any; stats: boolean }) => {

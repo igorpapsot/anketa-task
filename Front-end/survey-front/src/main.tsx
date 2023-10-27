@@ -9,6 +9,7 @@ import Login from './components/AuthComponents/Login.tsx';
 import Register from './components/AuthComponents/Register.tsx';
 import Stats from './components/StatsComponents/Stats.tsx';
 import SurveySelect from './components/InputComponents/SurveySelect.tsx';
+import WeightVersionForm from './components/WeightVersionComponents/WeightVersionForm.tsx';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "stats",
         element: <Stats />,
+      },
+      {
+        path: "weight-versions",
+        element: <WeightVersionForm />,
       }
     ],
   },
