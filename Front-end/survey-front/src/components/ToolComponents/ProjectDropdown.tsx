@@ -2,6 +2,7 @@ import axios from "axios";
 import { projectUrl } from "../../global/env";
 import { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "./Auth";
 
 const ProjectDropDown = ({ selectedClient, stats, setProjectId }: {
     selectedClient: number | undefined; stats: boolean | undefined; setProjectId: any
@@ -9,11 +10,16 @@ const ProjectDropDown = ({ selectedClient, stats, setProjectId }: {
 
     const [projects, setProjects] = useState<Project[]>()
     const navigate = useNavigate()
+    const auth = useAuth()
 
     const getProjects = async () => {
         if (selectedClient) {
             console.log("Getting projects...")
-            let res = await axios.get(projectUrl + selectedClient);
+            let res = await axios.get(projectUrl + selectedClient, {
+                headers: {
+                    Authorization: `Bearer ${auth.getToken()}`
+                }
+            });
 
             if (res && res.status == 200) {
                 setProjects(res.data)

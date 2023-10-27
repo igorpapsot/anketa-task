@@ -38,7 +38,7 @@ builder.Services.AddScoped<ISubmissionRepository, SQLSubmissionRepository>();
 builder.Services.AddScoped<IWeightVersionRepository, SQLWeightVersion>();
 builder.Services.AddScoped<IAnswerRepository, SQLAnswerRepository>();
 builder.Services.AddScoped<IWeightRepository, SQLWeightRepository>();
-builder.Services.AddScoped<ITokenRepository, SQLTokenRepository>();
+builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 builder.Services.AddScoped<ISubmissionService, SubmissionService>();
 builder.Services.AddScoped<IAuthService, AuthService>();

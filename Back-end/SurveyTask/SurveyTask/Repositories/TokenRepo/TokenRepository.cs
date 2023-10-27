@@ -6,11 +6,11 @@ using System.Text;
 
 namespace SurveyTask.Repositories.TokenRepo
 {
-    public class SQLTokenRepository : ITokenRepository
+    public class TokenRepository : ITokenRepository
     {
         private readonly IConfiguration configuration;
 
-        public SQLTokenRepository(IConfiguration configuration)
+        public TokenRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
         }

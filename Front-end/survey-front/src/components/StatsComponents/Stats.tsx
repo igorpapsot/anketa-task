@@ -12,7 +12,7 @@ const Stats = () => {
 
     const auth = useAuth()
 
-    if (!auth.getLogged()) {
+    if (!auth.getLogged() || auth.getUser()?.["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] !== "Admin") {
         return (
             <ErrorPage errorMessageProp={NOT_AUTHORIZED} />
         )
@@ -20,7 +20,11 @@ const Stats = () => {
 
     const getGrades = async () => {
         console.log("Getting submission grades...")
-        let res = await axios.get(gradesUrl + projectId);
+        let res = await axios.get(gradesUrl + projectId, {
+            headers: {
+                Authorization: `Bearer ${auth.getToken()}`
+            }
+        });
         console.log(res)
         if (res && res.status == 200) {
             setGrades(res.data)

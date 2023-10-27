@@ -8,30 +8,10 @@ import { useParams } from "react-router-dom";
 import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/Auth";
 import ErrorPage from "../ToolComponents/ErrorPage";
 
-export const sendSubmssion = async (
-    submission: Submission
-) => {
-    try {
-        const response = await axios.post(submissionUrl, {
-            projectId: submission.projectId,
-            answeredQuestions: submission.answeredQuestions,
-        });
-        return response.status;
-    } catch (e) {
-        let error = e as AxiosError;
-        if (error.response) {
-            return error.response.status;
-        } else {
-            return false;
-        }
-    }
-};
-
 const Form = () => {
 
     const [answers, setAnswers] = useState<AnsweredQuestion[]>([])
     const [formReponse, setFormReponse] = useState<string>("")
-    //const projectId = useSelector((state: RootState) => state.project.projectId)
     const { projectId } = useParams()
 
     const auth = useAuth()
@@ -42,9 +22,36 @@ const Form = () => {
         )
     }
 
+    const sendSubmssion = async (
+        submission: Submission
+    ) => {
+        try {
+            const response = await axios.post(submissionUrl, {
+                projectId: submission.projectId,
+                answeredQuestions: submission.answeredQuestions,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${auth.getToken()}`
+                }
+            });
+            return response.status;
+        } catch (e) {
+            let error = e as AxiosError;
+            if (error.response) {
+                return error.response.status;
+            } else {
+                return false;
+            }
+        }
+    };
+
     const getQuestions = async () => {
         console.log("Getting questions...")
-        const res = await axios.get(questionUrl);
+        const res = await axios.get(questionUrl, {
+            headers: {
+                Authorization: `Bearer ${auth.getToken()}`
+            }
+        });
         if (res && res.status == 200) {
             return res
         }

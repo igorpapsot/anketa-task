@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SurveyTask.Models.ProjectClass;
@@ -9,6 +10,7 @@ namespace SurveyTask.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProjectsController : ControllerBase
     {
         private readonly IMapper mapper;
@@ -22,6 +24,7 @@ namespace SurveyTask.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> GetByClientId([FromRoute] int id)
         {
             var projects = await projectRepository.GetByClientId(id);
@@ -36,6 +39,7 @@ namespace SurveyTask.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> GetAll()
         {
             var projects = await projectRepository.GetAll();

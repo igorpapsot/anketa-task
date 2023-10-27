@@ -10,7 +10,7 @@ namespace SurveyTask.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-/*    [Authorize]*/
+    [Authorize]
     public class SubmissionsController : ControllerBase
     {
         private readonly IMapper mapper;
@@ -29,7 +29,7 @@ namespace SurveyTask.Controllers
 
         [HttpGet]
         [Route("{projectId:int}")]
-/*        [Authorize(Roles = "Admin")]*/
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetByProjectId([FromRoute] int projectId)
         {
             var submissions = await submissionRepository.GetByProjectId(projectId);
@@ -43,7 +43,7 @@ namespace SurveyTask.Controllers
         }
 
         [HttpPost]
-        /*[Authorize(Roles = "Admin,User")]*/
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> CreateSubmission([FromBody] SubmissionWrite submissionReq)
         {
             var submission = await submissionService.CreateSubmission(submissionReq);
@@ -53,7 +53,7 @@ namespace SurveyTask.Controllers
 
         [HttpGet]
         [Route("Grades/{projectId}")]
-/*        [Authorize(Roles = "Admin")]*/
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetGrades([FromRoute] int projectId)
         {
             var grades = await submissionService.GetGrades(projectId);

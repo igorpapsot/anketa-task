@@ -2,13 +2,12 @@ import { useContext } from "react";
 import { createContext } from "react";
 import jwt_decode from "jwt-decode";
 
-// Define the context
 interface AuthContextType {
-    //logged: boolean;
     login: (jwt: string) => void;
     logout: () => void;
     getLogged: () => boolean;
     getUser: () => Jwt | null;
+    getToken: () => string
 }
 
 export const NOT_AUTHORIZED = "You are not authorized to view this page"
@@ -21,12 +20,9 @@ export default function AuthProvider({ children }: { children: JSX.Element }) {
     };
 
     const getLogged = () => {
-        console.log("1")
         if (localStorage.getItem("jwt")) {
-            console.log("2")
             return true;
         } else {
-            console.log("3")
             return false;
         }
     };
@@ -47,8 +43,17 @@ export default function AuthProvider({ children }: { children: JSX.Element }) {
         }
     }
 
+    const getToken = () => {
+        const jwt = localStorage.getItem("jwt")
+        if (jwt) {
+            return jwt
+        }
+
+        return ""
+    }
+
     return (
-        <AuthContext.Provider value={{ getLogged, getUser, logout, login }}>
+        <AuthContext.Provider value={{ getLogged, getUser, logout, login, getToken }}>
             {children}
         </AuthContext.Provider>
     );

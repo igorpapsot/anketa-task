@@ -44,7 +44,6 @@ const Login = () => {
         }
 
         const res = await loginRequest(username, password)
-        console.log(res)
 
         if (!res) {
             setError(UNSUCCESFULL_LOGIN)
