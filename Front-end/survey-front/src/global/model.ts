@@ -59,3 +59,10 @@ interface Jwt {
     "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": string,
     exp: number
 }
+
+interface WeightVersion {
+    id: number
+    versionNumber: number
+    versionName: string
+    deletedAt: string | null
+}

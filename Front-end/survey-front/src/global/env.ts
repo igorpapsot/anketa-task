@@ -14,4 +14,6 @@ const loginUrl = baseUrl + "Auth/Login"
 
 const registerUrl = baseUrl + "Auth/Register"
 
-export { clientUrl, projectUrl, questionUrl, submissionUrl, gradesUrl, loginUrl, registerUrl }
+const weightVersionUrl = baseUrl + "WeightVersion"
+
+export { clientUrl, projectUrl, questionUrl, submissionUrl, gradesUrl, loginUrl, registerUrl, weightVersionUrl }

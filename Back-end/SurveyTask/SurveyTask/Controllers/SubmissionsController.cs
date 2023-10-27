@@ -52,11 +52,11 @@ namespace SurveyTask.Controllers
         }
 
         [HttpGet]
-        [Route("Grades/{projectId}")]
+        [Route("Grades/{projectId}/Version/{versionId}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetGrades([FromRoute] int projectId)
+        public async Task<IActionResult> GetGrades([FromRoute] int projectId, [FromRoute] int versionId)
         {
-            var grades = await submissionService.GetGrades(projectId);
+            var grades = await submissionService.GetGrades(projectId, versionId);
 
             if (grades == null)
             {

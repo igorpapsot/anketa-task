@@ -50,23 +50,23 @@ namespace SurveyTask.Services.Submissions
             return grade;
         }
 
-        public async Task<List<Grade>> GetGrades(int projectId)
+        public async Task<List<Grade>> GetGrades(int projectId, int versionId)
         {
             var submissions = await submissionRepository.GetByProjectId(projectId);
             var grades = new List<Grade>();
-
+            int weightVersion = versionId;
             foreach (Submission submission in submissions)
             {
                 var answers = await answerRepository.GetBySubmissionId(submission.Id);
                 var grade = new Grade()
                 {
                     SubmissionId = submission.Id,
-                    WeightVersion = submission.WeightVersion.Id,
+                    WeightVersion = weightVersion,
                     OriginalScore = submission.OriginalScore
                 };
                 foreach (Answer answer in answers)
                 {
-                    var weight = await weightRepository.GetByVersionIdAndIndex(submission.WeightVersionId, answer.Question.Index);
+                    var weight = await weightRepository.GetByVersionIdAndIndex(weightVersion, answer.Question.Index);
                     grade.Value = grade.Value + answer.Value * weight.Value;
                 }
                 grades.Add(grade);

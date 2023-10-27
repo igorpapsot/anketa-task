@@ -23,14 +23,14 @@ const FormSelect = ({ setSelectedProjectId, stats }: { setSelectedProjectId?: an
         }
     };
 
-    const { data } = useQuery({
+    const { data: clients } = useQuery({
         queryKey: ['getClients'],
         queryFn: getClients,
     });
 
     return (
         <>
-            <ClientDropDown clients={data?.data} clientId={selectedClientId} setSelectedClient={setSelectedClientId} />
+            <ClientDropDown clients={clients?.data} clientId={selectedClientId} setSelectedClient={setSelectedClientId} />
             <ProjectDropdown selectedClient={selectedClientId} stats={stats} setProjectId={setSelectedProjectId} />
         </>
     )
