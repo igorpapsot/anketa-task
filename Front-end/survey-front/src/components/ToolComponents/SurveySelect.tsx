@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { clientUrl, projectUrl } from "../../global/env";
-import { useAuth } from "./Auth";
+import { useAuth } from "./AuthContext";
 import Dropdown from "./Dropdown";
 import { useNavigate } from "react-router-dom";
 
-const FormSelect = ({ setSelectedProjectId, stats }: { setSelectedProjectId?: any; stats: boolean }) => {
+const SurveySelect = ({ setSelectedProjectId, stats }: { setSelectedProjectId?: any; stats: boolean }) => {
 
     const [projects, setProjects] = useState<Project[]>()
     const [selectedClientId, setSelectedClientId] = useState<number>(-1)
@@ -73,4 +73,4 @@ const FormSelect = ({ setSelectedProjectId, stats }: { setSelectedProjectId?: an
     )
 }
 
-export default FormSelect;
+export default SurveySelect;

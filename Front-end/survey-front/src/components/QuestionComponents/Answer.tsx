@@ -14,8 +14,6 @@ const Answer = ({ answer, selectedId, setSelectedId, setText }: { answer: Answer
                     <label className="choiceVal">{answer.description}</label></>
                 : <textarea className="textChoice" onChange={(e) => setText(answer.id, e.target.value)}></textarea>}
         </div>
-
-
     )
 }
 

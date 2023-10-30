@@ -1,8 +1,8 @@
-import { NOT_AUTHORIZED, useAuth } from "../ToolComponents/Auth"
+import { NOT_AUTHORIZED, useAuth } from "../ToolComponents/AuthContext"
 import ErrorPage from "../ToolComponents/ErrorPage"
-import FormSelect from "../ToolComponents/FormSelect"
+import SurveySelect from "../ToolComponents/SurveySelect"
 
-const SurveySelect = () => {
+const SurveyPage = () => {
     const auth = useAuth()
 
     if (!auth.getLogged()) {
@@ -14,9 +14,9 @@ const SurveySelect = () => {
     return (
         <div className="dropDownPage">
             <h1>Survey for evaluating clients</h1>
-            <FormSelect stats={false}></FormSelect>
+            <SurveySelect stats={false}></SurveySelect>
         </div>
     )
 }
 
-export default SurveySelect
+export default SurveyPage

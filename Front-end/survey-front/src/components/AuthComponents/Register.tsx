@@ -70,7 +70,7 @@ const Register = () => {
             <TextInput label="Username" state={username} setState={setUsername} type="email"></TextInput>
             <TextInput label="Password" state={password} setState={setPassword} type="password"></TextInput>
             <TextInput label="Repeat password" state={repeatPassword} setState={setRepeatPassword} type="password"></TextInput>
-            <br />
+
             <button type="submit" className="button">Register</button>
         </form>
     )

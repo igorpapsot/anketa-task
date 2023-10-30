@@ -4,9 +4,9 @@ import InputQuestion from "./Question";
 
 const QuestionField = ({ question, addAnswer }: { question: Question; addAnswer: any }) => {
 
-    const [selectedId, setSelectedId] = useState<number>()
+    const [selectedId, setSelectedId] = useState<number>(-1)
 
-    const setSelectedHandler = (id: number) => {
+    const setSelectedIdHandler = (id: number) => {
         setSelectedId(id)
         addAnswer(id, question.id, "")
     }
@@ -20,7 +20,7 @@ const QuestionField = ({ question, addAnswer }: { question: Question; addAnswer:
             <div className={question.type === 0 ? "textInput" : "radioInput"}>
                 <InputQuestion question={question} />
                 {question.answers.map((a: Answer) => {
-                    return <Answer answer={a} selectedId={selectedId} setSelectedId={setSelectedHandler} key={a.id} setText={setTextHandler} />
+                    return <Answer answer={a} selectedId={selectedId} setSelectedId={setSelectedIdHandler} key={a.id} setText={setTextHandler} />
                 })}
             </div>
         </>

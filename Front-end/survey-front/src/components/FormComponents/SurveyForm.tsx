@@ -1,14 +1,49 @@
-import QuestionField from "../InputComponents/QuestionField";
+import QuestionField from "../QuestionComponents/QuestionField";
 import FormButton from "./FormButton";
 import axios, { AxiosError } from "axios";
 import { questionUrl, submissionUrl } from "../../global/env";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/Auth";
+import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/AuthContext";
 import ErrorPage from "../ToolComponents/ErrorPage";
 
-const Form = () => {
+const getQuestions = async (token: string) => {
+    console.log("Getting questions...")
+    const res = await axios.get(questionUrl, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    if (res && res.status == 200) {
+        return res
+    }
+};
+
+const sendSubmssion = async (
+    submission: Submission, token: string
+) => {
+    try {
+        const response = await axios.post(submissionUrl, {
+            projectId: submission.projectId,
+            answeredQuestions: submission.answeredQuestions,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.status;
+    } catch (e) {
+        let error = e as AxiosError;
+        if (error.response) {
+            return error.response.status;
+        } else {
+            return false;
+        }
+    }
+};
+
+const SurveyForm = () => {
 
     const [answers, setAnswers] = useState<AnsweredQuestion[]>([])
     const [formReponse, setFormReponse] = useState<string>("")
@@ -22,44 +57,9 @@ const Form = () => {
         )
     }
 
-    const sendSubmssion = async (
-        submission: Submission
-    ) => {
-        try {
-            const response = await axios.post(submissionUrl, {
-                projectId: submission.projectId,
-                answeredQuestions: submission.answeredQuestions,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${auth.getToken()}`
-                }
-            });
-            return response.status;
-        } catch (e) {
-            let error = e as AxiosError;
-            if (error.response) {
-                return error.response.status;
-            } else {
-                return false;
-            }
-        }
-    };
-
-    const getQuestions = async () => {
-        console.log("Getting questions...")
-        const res = await axios.get(questionUrl, {
-            headers: {
-                Authorization: `Bearer ${auth.getToken()}`
-            }
-        });
-        if (res && res.status == 200) {
-            return res
-        }
-    };
-
     const { data: questions } = useQuery({
         queryKey: ['getQuestions'],
-        queryFn: getQuestions,
+        queryFn: () => getQuestions(auth.getToken()),
     });
 
     const handleAddAnswers = (answerId: number, questionId: number, text: string) => {
@@ -91,8 +91,6 @@ const Form = () => {
         setAnswers(newAnswers)
     }
 
-
-
     const handleSubmitForm = async (e: React.FormEvent) => {
         e.preventDefault()
 
@@ -123,7 +121,7 @@ const Form = () => {
             projectId: Number(projectId)
         }
 
-        const res = await sendSubmssion(submission)
+        const res = await sendSubmssion(submission, auth.getToken())
         console.log(res)
 
         if (!res) {
@@ -139,7 +137,6 @@ const Form = () => {
         setFormReponse("Something went wrong")
     }
 
-
     return (
         <div className="form">
             <label className={formReponse === "Succesfull submission" ? "formSuccess" : "formError"}>{formReponse}</label>
@@ -154,4 +151,4 @@ const Form = () => {
     )
 }
 
-export default Form;
+export default SurveyForm;

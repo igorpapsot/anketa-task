@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../ToolComponents/Auth";
+import { useAuth } from "../ToolComponents/AuthContext";
 
 const NavHeader = () => {
     const auth = useAuth()

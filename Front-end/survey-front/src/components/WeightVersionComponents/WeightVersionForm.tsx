@@ -1,18 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ErrorPage from "../ToolComponents/ErrorPage";
 import TextInput from "../ToolComponents/TextInput";
 import NumberInput from "../ToolComponents/NumberInput";
 import axios, { AxiosError } from "axios";
 import { questionUrl, weightVersionUrl } from "../../global/env";
-import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/Auth";
+import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/AuthContext";
 import WeightList from "./WeightList";
 import Dropdown from "../ToolComponents/Dropdown";
-
-const WEIGHT_EXISTS = "Weight for this questions already added"
-const SELECT_ALL_QUESTIONS = "Please create weights for all questions"
-const SUCCESS = "Succesfull creating of weight version"
-const NULL = "Please select weight and question"
-const ENTER_NAME = "Please enter version name"
+import { useQuery } from "@tanstack/react-query";
 
 const addWeightVersionRequest = async (versionName: string, weights: Weight[]) => {
     try {
@@ -35,6 +30,23 @@ const addWeightVersionRequest = async (versionName: string, weights: Weight[]) =
     }
 }
 
+const getQuestions = async (token: string) => {
+    console.log("Getting questions...")
+    const res = await axios.get(questionUrl, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    if (res && res.status == 200) {
+        return res
+    }
+};
+
+const WEIGHT_EXISTS = "Weight for this questions already added"
+const SELECT_ALL_QUESTIONS = "Please create weights for all questions"
+const SUCCESS = "Succesfull creating of weight version"
+const NULL = "Please select weight and question"
+const ENTER_NAME = "Please enter version name"
 
 const WeightVersionForm = () => {
 
@@ -52,23 +64,11 @@ const WeightVersionForm = () => {
     const [weightValue, setWeightValue] = useState<number>(0)
     const [weights, setWeights] = useState<Weight[]>([])
     const [selectedQuestionId, setSelectedQuestionId] = useState<number>(-1)
-    const [questions, setQuestions] = useState<Question[]>([])
 
-    const getQuestions = async () => {
-        console.log("Getting questions...")
-        const res = await axios.get(questionUrl, {
-            headers: {
-                Authorization: `Bearer ${auth.getToken()}`
-            }
-        });
-        if (res && res.status == 200) {
-            setQuestions(res.data)
-        }
-    };
-
-    useEffect(() => {
-        getQuestions()
-    }, [])
+    const { data: questions } = useQuery({
+        queryKey: ['getQuestions'],
+        queryFn: () => getQuestions(auth.getToken()),
+    });
 
     const addWeightHandler = () => {
         if (weightValue === 0 || selectedQuestionId === -1) {
@@ -95,7 +95,7 @@ const WeightVersionForm = () => {
             return
         }
 
-        const allWeightsExist = weights.length === questions.length
+        const allWeightsExist = weights.length === questions?.data.length
         if (!allWeightsExist) {
             setError(SELECT_ALL_QUESTIONS)
             return
@@ -126,7 +126,7 @@ const WeightVersionForm = () => {
     return (
         <div className="weightVersions">
             <label className={error === SUCCESS ? "formSuccess" : "formError"}>{error}</label>
-            <Dropdown values={questions.map((q: Question) => { return { id: q.id, value: q.index + ":" + q.description } })}
+            <Dropdown values={questions?.data.map((q: Question) => { return { id: q.id, value: q.index + ":" + q.description } })}
                 selectedValue={selectedQuestionId} setSelected={setSelectedQuestionId} label={"Question"} />
 
             <NumberInput label="Weight value" state={weightValue} setState={setWeightValue} min={1} max={10} />
@@ -136,7 +136,6 @@ const WeightVersionForm = () => {
 
             <WeightList weights={weights} removeWeightHandler={removeWeightHandler} />
         </div>
-
     )
 }
 

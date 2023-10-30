@@ -8,7 +8,6 @@ interface DropdownProps<T> {
 
 const Dropdown = <T extends { id: number, value: string }>({ values, setSelected, selectedValue, label }: DropdownProps<T>) => {
 
-
     if (values == undefined) {
         return (
             <>

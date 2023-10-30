@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Form from './components/FormComponents/Form.tsx';
+import SurveyForm from './components/FormComponents/SurveyForm.tsx';
 import ErrorPage from './components/ToolComponents/ErrorPage.tsx';
 import Login from './components/AuthComponents/Login.tsx';
 import Register from './components/AuthComponents/Register.tsx';
 import Stats from './components/StatsComponents/Stats.tsx';
-import SurveySelect from './components/InputComponents/SurveySelect.tsx';
 import WeightVersionForm from './components/WeightVersionComponents/WeightVersionForm.tsx';
+import SurveyPage from './components/QuestionComponents/SurveySelect.tsx';
 
 const router = createBrowserRouter([
   {
@@ -27,11 +27,11 @@ const router = createBrowserRouter([
       },
       {
         path: "survey",
-        element: <SurveySelect />
+        element: <SurveyPage />
       },
       {
         path: "survey/:projectId",
-        element: <Form />,
+        element: <SurveyForm />,
       },
       {
         path: "register",

@@ -1,9 +1,3 @@
-
-export interface RootState {
-    project: {
-        projectId: number;
-    };
-}
 const FormButton = ({ projectId }: { projectId: number }) => {
 
     return (

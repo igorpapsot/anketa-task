@@ -34,9 +34,6 @@ interface Project {
 
 interface Submission {
     projectId: number
-    //id: number
-    //weightVersionId: number
-    //deletedAt: null
     answeredQuestions: AnsweredQuestion[]
 }
 

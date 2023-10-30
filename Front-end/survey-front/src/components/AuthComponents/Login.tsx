@@ -2,7 +2,7 @@ import { useState } from "react"
 import TextInput from "../ToolComponents/TextInput"
 import axios, { AxiosError } from "axios";
 import { loginUrl } from "../../global/env";
-import { useAuth } from "../ToolComponents/Auth";
+import { useAuth } from "../ToolComponents/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const loginRequest = async (username: string, password: string) => {
