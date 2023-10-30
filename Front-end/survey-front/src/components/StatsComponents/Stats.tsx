@@ -63,7 +63,7 @@ const Stats = () => {
         <div className="weightVersions">
             <FormSelect stats={true} setSelectedProjectId={setProjectId} />
             <WeightVersionSelect version={selectedVersion} versions={versions?.data} setVersion={setSelectedVersion} />
-            <button className="button statsButton" onClick={() => showStatsHandler()}>Show stats</button>
+            <button className="button" onClick={() => showStatsHandler()}>Show stats</button>
 
             {/* If project is selected, there is no submissions and button for stats is clicked*/}
             {projectId !== -1 && grades.length === 0 && btnClicked ? <p>No submissions for this project found</p> : <></>}

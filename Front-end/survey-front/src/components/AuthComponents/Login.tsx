@@ -66,7 +66,7 @@ const Login = () => {
             <TextInput label="Username" state={username} setState={setUsername} type="email"></TextInput>
             <TextInput label="Password" state={password} setState={setPassword} type="password"></TextInput>
             <br />
-            <button type="submit" className="button authButton">Login</button>
+            <button type="submit" className="button">Login</button>
         </form>
     )
 }

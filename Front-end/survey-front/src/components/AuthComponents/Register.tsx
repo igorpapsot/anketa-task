@@ -71,7 +71,7 @@ const Register = () => {
             <TextInput label="Password" state={password} setState={setPassword} type="password"></TextInput>
             <TextInput label="Repeat password" state={repeatPassword} setState={setRepeatPassword} type="password"></TextInput>
             <br />
-            <button type="submit" className="button authButton">Register</button>
+            <button type="submit" className="button">Register</button>
         </form>
     )
 }

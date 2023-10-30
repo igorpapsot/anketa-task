@@ -10,7 +10,7 @@ const WeightVersionSelect = ({ versions, version, setVersion }: { versions: Weig
         return (
             <>
                 {label}
-                <select className="dropdown button">
+                <select className="dropdown">
                     <option>No clients found</option>
                 </select>
             </>
@@ -21,7 +21,7 @@ const WeightVersionSelect = ({ versions, version, setVersion }: { versions: Weig
     return (
         <>
             {label}
-            <select className="dropdown button" onChange={(e) => { selectHandler(e.target.value) }}>
+            <select className="dropdown" onChange={(e) => { selectHandler(e.target.value) }}>
                 {version === -1 && <option value={-1} hidden>Select weight version</option>}
                 {versions.length === 0 && <option disabled>No versions found</option>}
                 {versions.map((c: WeightVersion) => {

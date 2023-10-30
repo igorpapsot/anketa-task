@@ -48,7 +48,7 @@ const ProjectDropDown = ({ selectedClient, stats, setProjectId }: {
         return (
             <>
                 <label>Projects:</label>
-                <select className="dropdown button">
+                <select className="dropdown">
                     <option hidden>No project found</option>
                 </select>
             </>
@@ -58,7 +58,7 @@ const ProjectDropDown = ({ selectedClient, stats, setProjectId }: {
     return (
         <>
             <label>Projects:</label>
-            <select className="dropdown button" onChange={(e) => { selectHandler(e.target.value) }}>
+            <select className="dropdown" onChange={(e) => { selectHandler(e.target.value) }}>
                 <option hidden>Select project</option>
                 {selectedClient === -1 ? <option value={-1} disabled>Please select client first</option> : <></>}
                 {projects?.map((p: Project) => {

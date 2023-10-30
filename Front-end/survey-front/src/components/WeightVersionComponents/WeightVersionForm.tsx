@@ -128,9 +128,9 @@ const WeightVersionForm = () => {
             <label className={error === SUCCESS ? "formSuccess" : "formError"}>{error}</label>
             <QuestionSelect questions={questions} questionId={selectedQuestionId} setQuestionId={setSelectedQuestionId} />
             <NumberInput label="Weight value" state={weightValue} setState={setWeightValue} min={1} max={10} />
-            <button className="button authButton" onClick={() => addWeightHandler()}>Add weight</button>
+            <button className="button" onClick={() => addWeightHandler()}>Add weight</button>
             <TextInput label="Version name" state={versionName} setState={setVersionName} type="text" />
-            <button type="submit" className="button authButton" onClick={() => addVersionHandler()}>Submit</button>
+            <button type="submit" className="button" onClick={() => addVersionHandler()}>Submit</button>
 
             <WeightList weights={weights} removeWeightHandler={removeWeightHandler} />
         </div>

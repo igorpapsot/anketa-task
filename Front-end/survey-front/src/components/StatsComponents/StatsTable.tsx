@@ -23,9 +23,9 @@ const StatsTable = ({ grades }: { grades: Grade[] }) => {
                 </tr>
             </thead>
             <tbody>
-                {grades.map((g: Grade) => (
+                {grades.map((g: Grade, i: number) => (
                     <tr key={g.submissionId}>
-                        <td>{g.submissionId}</td>
+                        <td>{i + 1}</td>
                         <td>{g.originalScore}</td>
                         <td>{g.value}</td>
                     </tr>

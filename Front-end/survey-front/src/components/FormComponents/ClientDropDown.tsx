@@ -10,7 +10,7 @@ const ClientDropDown = ({ clients, clientId, setSelectedClient }: { clients: Cli
         return (
             <>
                 {label}
-                <select className="dropdown button">
+                <select className="dropdown">
                     <option>No clients found</option>
                 </select>
             </>
@@ -20,7 +20,7 @@ const ClientDropDown = ({ clients, clientId, setSelectedClient }: { clients: Cli
     return (
         <>
             {label}
-            <select className="dropdown button" onChange={(e) => { selectHandler(e.target.value) }}>
+            <select className="dropdown" onChange={(e) => { selectHandler(e.target.value) }}>
                 {clientId === -1 && <option value={-1} hidden>Select client</option>}
                 {clients.map((c: Client) => {
                     return <option value={c.id} key={c.id}>{c.name}</option>

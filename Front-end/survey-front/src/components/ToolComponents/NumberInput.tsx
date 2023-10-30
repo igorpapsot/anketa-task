@@ -2,7 +2,7 @@ const NumberInput = ({ label, state, setState, min, max }: { label: string; stat
     return (
         <>
             <label>{label}</label>
-            <input value={state} onChange={(e) => setState(e.target.value)} type="number" min={min} max={max} placeholder={label} className="authInput button"></input>
+            <input value={state} onChange={(e) => setState(e.target.value)} type="number" min={min} max={max} placeholder={label} className="input"></input>
         </>
     )
 }

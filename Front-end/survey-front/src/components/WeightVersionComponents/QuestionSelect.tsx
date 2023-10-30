@@ -20,7 +20,7 @@ const QuestionSelect = ({ questionId, questions, setQuestionId }: { questionId: 
     return (
         <>
             {label}
-            <select className="authInput button" onChange={(e) => { selectHandler(e.target.value) }}>
+            <select className="dropdown" onChange={(e) => { selectHandler(e.target.value) }}>
                 {questionId === -1 && <option value={-1} hidden>Select question</option>}
                 {questions.map((c: Question) => {
                     return <option value={c.id} key={c.id}>{c.index}:{c.description}</option>

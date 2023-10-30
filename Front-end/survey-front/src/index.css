@@ -49,11 +49,6 @@
     font-size: medium;
 }
 
-.submitBtn:hover {
-    background-color: rgb(205, 204, 204);
-    cursor: pointer;
-}
-
 .submitBtn:disabled:active {
     box-shadow: none;
 }
@@ -116,13 +111,6 @@
     align-items: center;
 }
 
-.dropdown {
-    padding: 5px 20px;
-    margin: 5px;
-    width: 35vh;
-    text-align: center;
-}
-
 /*Auth form*/
 
 .authPage {
@@ -139,20 +127,15 @@
     width: 35vh;
 }
 
-.authButton {
-    margin: 10px;
-    padding: 5px 20px;
-}
-
-.authButton:hover {
+.button:hover {
     cursor: pointer;
 }
 
-.authButton:disabled:active {
+.button:disabled:active {
     box-shadow: none;
 }
 
-.authButton:active {
+.button:active {
     box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(190, 211, 251, 0.25), 0px 0px 0px 3.5px rgba(62, 66, 74, 0.5);
 }
 
@@ -184,7 +167,6 @@
 
 .navHeader {
     background-color: rgb(205, 204, 204);
-    border-radius: 0px 0px 5px 5px;
     padding: 15px;
     margin: 0px;
     display: flex;
@@ -216,11 +198,6 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-}
-
-.statsButton {
-    margin: 20px;
-    padding: 3px 10px;
 }
 
 .gradeTable {
@@ -260,10 +237,33 @@
 
 /*General*/
 
+.input {
+    background-color: rgb(205, 204, 204);
+    border: 1px rgb(115, 110, 110) solid;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px 20px;
+    width: 35vh;
+}
+
 .button {
     background-color: rgb(205, 204, 204);
     border: 1px rgb(115, 110, 110) solid;
     border-radius: 5px;
+    margin: 20px;
+    padding: 5px 20px;
+    width: 35vh;
+}
+
+.dropdown {
+    background-color: rgb(205, 204, 204);
+    border: 1px rgb(115, 110, 110) solid;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px 20px;
+    margin: 5px;
+    width: 35vh;
+    text-align: center;
 }
 
 label {

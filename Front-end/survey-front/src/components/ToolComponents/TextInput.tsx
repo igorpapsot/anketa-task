@@ -2,7 +2,7 @@ const TextInput = ({ label, state, setState, type }: { label: string; state: str
     return (
         <>
             <label>{label}</label>
-            <input value={state} onChange={(e) => setState(e.target.value)} type={type} placeholder={label} className="authInput button"></input>
+            <input value={state} onChange={(e) => setState(e.target.value)} type={type} placeholder={label} className="input"></input>
         </>
     )
 }
