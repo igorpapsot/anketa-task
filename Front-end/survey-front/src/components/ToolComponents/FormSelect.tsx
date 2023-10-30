@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { clientUrl } from "../../global/env";
-import ProjectDropdown from "../FormComponents/ProjectDropdown";
-import ClientDropDown from "../FormComponents/ClientDropDown";
+import { clientUrl, projectUrl } from "../../global/env";
 import { useAuth } from "./Auth";
+import Dropdown from "./Dropdown";
+import { useNavigate } from "react-router-dom";
 
 const FormSelect = ({ setSelectedProjectId, stats }: { setSelectedProjectId?: any; stats: boolean }) => {
 
+    const [projects, setProjects] = useState<Project[]>()
     const [selectedClientId, setSelectedClientId] = useState<number>(-1)
+
+    const navigate = useNavigate()
     const auth = useAuth()
 
     const getClients = async () => {
@@ -23,15 +26,49 @@ const FormSelect = ({ setSelectedProjectId, stats }: { setSelectedProjectId?: an
         }
     };
 
+    const getProjects = async () => {
+        if (selectedClientId != -1) {
+            console.log("Getting projects...")
+            let res = await axios.get(projectUrl + selectedClientId, {
+                headers: {
+                    Authorization: `Bearer ${auth.getToken()}`
+                }
+            });
+
+            if (res && res.status == 200) {
+                setProjects(res.data)
+            }
+        }
+    };
+
     const { data: clients } = useQuery({
         queryKey: ['getClients'],
         queryFn: getClients,
     });
 
+    useEffect(() => {
+        if (selectedClientId === -1) {
+            return;
+        }
+
+        getProjects()
+    }, [selectedClientId])
+
+    const selectHandler = (e: string) => {
+        if (!stats) {
+            navigate("/survey/" + e)
+            return
+        }
+        setSelectedProjectId(e)
+
+    }
+
     return (
         <>
-            <ClientDropDown clients={clients?.data} clientId={selectedClientId} setSelectedClient={setSelectedClientId} />
-            <ProjectDropdown selectedClient={selectedClientId} stats={stats} setProjectId={setSelectedProjectId} />
+            <Dropdown values={clients?.data.map((c: Client) => { return { id: c.id, value: c.name } })}
+                selectedValue={selectedClientId} setSelected={setSelectedClientId} label="Client" />
+            <Dropdown values={projects?.map((p: Project) => { return { id: p.id, value: p.name } })}
+                selectedValue={-1} setSelected={selectHandler} label="Project" />
         </>
     )
 }

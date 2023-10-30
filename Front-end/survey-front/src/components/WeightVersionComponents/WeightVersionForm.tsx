@@ -4,9 +4,9 @@ import TextInput from "../ToolComponents/TextInput";
 import NumberInput from "../ToolComponents/NumberInput";
 import axios, { AxiosError } from "axios";
 import { questionUrl, weightVersionUrl } from "../../global/env";
-import QuestionSelect from "./QuestionSelect";
 import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/Auth";
 import WeightList from "./WeightList";
+import Dropdown from "../ToolComponents/Dropdown";
 
 const WEIGHT_EXISTS = "Weight for this questions already added"
 const SELECT_ALL_QUESTIONS = "Please create weights for all questions"
@@ -126,7 +126,9 @@ const WeightVersionForm = () => {
     return (
         <div className="weightVersions">
             <label className={error === SUCCESS ? "formSuccess" : "formError"}>{error}</label>
-            <QuestionSelect questions={questions} questionId={selectedQuestionId} setQuestionId={setSelectedQuestionId} />
+            <Dropdown values={questions.map((q: Question) => { return { id: q.id, value: q.index + ":" + q.description } })}
+                selectedValue={selectedQuestionId} setSelected={setSelectedQuestionId} label={"Question"} />
+
             <NumberInput label="Weight value" state={weightValue} setState={setWeightValue} min={1} max={10} />
             <button className="button" onClick={() => addWeightHandler()}>Add weight</button>
             <TextInput label="Version name" state={versionName} setState={setVersionName} type="text" />

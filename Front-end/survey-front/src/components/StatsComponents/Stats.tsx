@@ -4,9 +4,9 @@ import axios from "axios"
 import { gradesUrl, weightVersionUrl } from "../../global/env"
 import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/Auth"
 import ErrorPage from "../ToolComponents/ErrorPage"
-import WeightVersionSelect from "./WeightVersionSelect"
 import { useQuery } from "@tanstack/react-query"
 import StatsTable from "./StatsTable"
+import Dropdown from "../ToolComponents/Dropdown"
 
 const Stats = () => {
 
@@ -62,7 +62,7 @@ const Stats = () => {
     return (
         <div className="weightVersions">
             <FormSelect stats={true} setSelectedProjectId={setProjectId} />
-            <WeightVersionSelect version={selectedVersion} versions={versions?.data} setVersion={setSelectedVersion} />
+            <Dropdown selectedValue={selectedVersion} values={versions?.data.map((v: WeightVersion) => { return { id: v.id, value: v.versionName } })} setSelected={setSelectedVersion} label={"Weight version"} />
             <button className="button" onClick={() => showStatsHandler()}>Show stats</button>
 
             {/* If project is selected, there is no submissions and button for stats is clicked*/}
