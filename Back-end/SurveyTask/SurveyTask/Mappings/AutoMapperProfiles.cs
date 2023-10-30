@@ -21,7 +21,9 @@ namespace SurveyTask.Mappings
             CreateMap<Submission, SubmissionWrite>().ReverseMap();
             CreateMap<AnsweredQuestion, AnsweredQuestionWrite>().ReverseMap();
             CreateMap<Weight, WeightRead>().ReverseMap();
+            CreateMap<Weight, WeightWrite>().ReverseMap();
             CreateMap<WeightVersion, WeightVersionRead>().ReverseMap();
+            CreateMap<WeightVersion, WeightVersionWrite>().ReverseMap();
             CreateMap<Answer, AnswerRead>()
             .ForMember(dest => dest.QuestionId, opt => opt.MapFrom(src => src.QuestionId))
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))

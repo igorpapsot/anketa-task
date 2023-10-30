@@ -7,5 +7,7 @@ namespace SurveyTask.Repositories.WeightVersionRepo
         Task<WeightVersion> GetCurrentVersion();
 
         Task<List<WeightVersion>> GetAll();
+
+        Task<WeightVersion> CreateVersion(WeightVersion weight);
     }
 }

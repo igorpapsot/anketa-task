@@ -1,6 +1,6 @@
 const QuestionSelect = ({ questionId, questions, setQuestionId }: { questionId: number, questions: Question[] | undefined, setQuestionId: any; }) => {
 
-    const label = <label>Question:</label>;
+    const label = <label>Question</label>;
 
     const selectHandler = (val: string) => {
         setQuestionId(Number(val))

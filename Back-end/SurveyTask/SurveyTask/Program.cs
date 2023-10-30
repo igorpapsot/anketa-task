@@ -14,6 +14,7 @@ using SurveyTask.Repositories.WeightRepo;
 using SurveyTask.Repositories.WeightVersionRepo;
 using SurveyTask.Services.Auth;
 using SurveyTask.Services.Submissions;
+using SurveyTask.Services.WeightVersions;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,6 +43,7 @@ builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 builder.Services.AddScoped<ISubmissionService, SubmissionService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IWeightVersionService, WeightVersionService>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 

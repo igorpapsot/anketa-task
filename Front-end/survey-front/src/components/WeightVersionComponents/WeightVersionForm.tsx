@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ErrorPage from "../ToolComponents/ErrorPage";
 import TextInput from "../ToolComponents/TextInput";
 import NumberInput from "../ToolComponents/NumberInput";
-import axios from "axios";
-import { questionUrl } from "../../global/env";
+import axios, { AxiosError } from "axios";
+import { questionUrl, weightVersionUrl } from "../../global/env";
 import QuestionSelect from "./QuestionSelect";
 import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/Auth";
 import WeightList from "./WeightList";
@@ -13,6 +13,28 @@ const SELECT_ALL_QUESTIONS = "Please create weights for all questions"
 const SUCCESS = "Succesfull creating of weight version"
 const NULL = "Please select weight and question"
 const ENTER_NAME = "Please enter version name"
+
+const addWeightVersionRequest = async (versionName: string, weights: Weight[]) => {
+    try {
+        const response = await axios.post(weightVersionUrl, {
+            versionName: versionName,
+            weights: weights
+        }, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`
+            }
+        });
+        return response.status;
+    } catch (e) {
+        let error = e as AxiosError;
+        if (error.response) {
+            return error.response.status;
+        } else {
+            return false;
+        }
+    }
+}
+
 
 const WeightVersionForm = () => {
 
@@ -31,6 +53,22 @@ const WeightVersionForm = () => {
     const [weights, setWeights] = useState<Weight[]>([])
     const [selectedQuestionId, setSelectedQuestionId] = useState<number>(-1)
     const [questions, setQuestions] = useState<Question[]>([])
+
+    const getQuestions = async () => {
+        console.log("Getting questions...")
+        const res = await axios.get(questionUrl, {
+            headers: {
+                Authorization: `Bearer ${auth.getToken()}`
+            }
+        });
+        if (res && res.status == 200) {
+            setQuestions(res.data)
+        }
+    };
+
+    useEffect(() => {
+        getQuestions()
+    }, [])
 
     const addWeightHandler = () => {
         if (weightValue === 0 || selectedQuestionId === -1) {
@@ -51,20 +89,32 @@ const WeightVersionForm = () => {
         setError(WEIGHT_EXISTS)
     }
 
-    const addVersionHandler = () => {
+    const addVersionHandler = async () => {
         if (versionName === "") {
             setError(ENTER_NAME)
             return
         }
 
         const allWeightsExist = weights.length === questions.length
-        if (allWeightsExist) {
-            console.log("Sending data ...")
+        if (!allWeightsExist) {
+            setError(SELECT_ALL_QUESTIONS)
+            return
+        }
+        console.log("Sending data ...")
+        const res = await addWeightVersionRequest(versionName, weights)
+        console.log(res)
+
+        if (!res) {
+            setError("Something went wrong")
+            return
+        }
+
+        if (res === 200) {
             setError(SUCCESS)
             return
         }
 
-        setError(SELECT_ALL_QUESTIONS)
+        setError("Something went wrong")
     }
 
     const removeWeightHandler = (weightIndex: number) => {
@@ -73,37 +123,18 @@ const WeightVersionForm = () => {
         })
     }
 
-    const getQuestions = async () => {
-        console.log("Getting questions...")
-        const res = await axios.get(questionUrl, {
-            headers: {
-                Authorization: `Bearer ${auth.getToken()}`
-            }
-        });
-        if (res && res.status == 200) {
-            setQuestions(res.data)
-        }
-    };
-
-    useEffect(() => {
-        getQuestions()
-    }, [])
-
-
     return (
         <div className="weightVersions">
             <label className={error === SUCCESS ? "formSuccess" : "formError"}>{error}</label>
-
-            <div />
             <QuestionSelect questions={questions} questionId={selectedQuestionId} setQuestionId={setSelectedQuestionId} />
             <NumberInput label="Weight value" state={weightValue} setState={setWeightValue} min={1} max={10} />
             <button className="button authButton" onClick={() => addWeightHandler()}>Add weight</button>
+            <TextInput label="Version name" state={versionName} setState={setVersionName} type="text" />
+            <button type="submit" className="button authButton" onClick={() => addVersionHandler()}>Submit</button>
 
             <WeightList weights={weights} removeWeightHandler={removeWeightHandler} />
-
-            <TextInput label="Version name" state={versionName} setState={setVersionName} type="text" />
-            <button type="submit" className="button authButton" onClick={() => addVersionHandler()}>Add version</button>
         </div>
+
     )
 }
 

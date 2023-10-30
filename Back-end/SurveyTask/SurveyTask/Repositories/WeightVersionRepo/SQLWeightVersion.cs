@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SurveyTask.Data;
+using SurveyTask.Models.SubmissionClass;
 using SurveyTask.Models.WeightVersionClass;
 
 namespace SurveyTask.Repositories.WeightVersionRepo
@@ -11,6 +12,21 @@ namespace SurveyTask.Repositories.WeightVersionRepo
         public SQLWeightVersion(SurveyDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<WeightVersion> CreateVersion(WeightVersion weightversion)
+        {
+            await dbContext.WeightVersions.AddAsync(weightversion);
+            await dbContext.SaveChangesAsync();
+
+            foreach (var weight in weightversion.Weights)
+            {
+                weight.WeightVersionId = weightversion.Id;
+            }
+
+            await dbContext.SaveChangesAsync();
+
+            return weightversion;
         }
 
         public async Task<List<WeightVersion>> GetAll()
