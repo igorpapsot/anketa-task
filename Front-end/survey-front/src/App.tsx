@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import NavHeader from './components/Header/NavHeader'
 import { Outlet } from 'react-router-dom'
 import AuthProvider from './components/Contexts/AuthContext'
+import ToastProvider from './components/Contexts/ToastContext'
 
 function App() {
 
@@ -10,10 +11,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <>
-          <NavHeader />
-          <Outlet />
-        </>
+        <ToastProvider>
+          <>
+            <NavHeader />
+            <Outlet />
+          </>
+        </ToastProvider>
       </AuthProvider>
     </QueryClientProvider>
   )

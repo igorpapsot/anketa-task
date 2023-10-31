@@ -6,7 +6,7 @@ import { useAuth } from "../Contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import '../../css/auth.scss';
 import { useToast } from "../Contexts/ToastContext";
-import ToastTypeE from "../ToastComponent/ToastTypeE";
+import ToastTypeE from "../ToastComponents/ToastTypeE";
 
 const loginRequest = async (username: string, password: string) => {
     try {
@@ -54,7 +54,7 @@ const Login = () => {
         }
 
         if (res.status === 200) {
-            toastContext.dispatch(SUCCESFULL_LOGIN, ToastTypeE.Error)
+            toastContext.dispatch(SUCCESFULL_LOGIN, ToastTypeE.Success)
             auth.login(res.data)
             navigate("/survey")
             return

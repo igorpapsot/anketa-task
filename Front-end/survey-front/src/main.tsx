@@ -9,8 +9,7 @@ import Login from './components/AuthComponents/Login.tsx';
 import Register from './components/AuthComponents/Register.tsx';
 import Stats from './components/StatsComponents/Stats.tsx';
 import WeightVersionForm from './components/WeightVersionComponents/WeightVersionForm.tsx';
-import SurveyPage from './components/QuestionComponents/SurveySelect.tsx';
-import ToastProvider from './components/Contexts/ToastContext.tsx';
+import SurveyPage from './components/FormComponents/SurveySelect.tsx';
 
 const router = createBrowserRouter([
   {
@@ -52,8 +51,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ToastProvider>
-      <RouterProvider router={router} />
-    </ToastProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )

@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { useAuth, NOT_AUTHORIZED } from "../Contexts/AuthContext";
 import ErrorPage from "../ToolComponents/ErrorPage";
 import '../../css/form.scss'
+import { useToast } from "../Contexts/ToastContext";
+import ToastTypeE from "../ToastComponents/ToastTypeE";
 
 const getQuestions = async (token: string) => {
     console.log("Getting questions...")
@@ -44,13 +46,17 @@ const sendSubmssion = async (
     }
 };
 
+const FILL_ALL_FIELDS = "Please answer all required questions";
+const SOMETHING_WENT_WRONG = "Something went wrong"
+const SUCCESS = "Succesfull submission"
+
 const SurveyForm = () => {
 
     const [answers, setAnswers] = useState<AnsweredQuestion[]>([])
-    const [formReponse, setFormReponse] = useState<string>("")
     const { projectId } = useParams()
 
     const auth = useAuth()
+    const toastContext = useToast()
 
     if (!auth.getLogged()) {
         return (
@@ -112,7 +118,7 @@ const SurveyForm = () => {
         const requiredAnswersExist = requiredAnswers.length === requiredQuestions.length
 
         if (Number(projectId) === -1 || !requiredAnswersExist) {
-            setFormReponse("Please answer all required questions")
+            toastContext.dispatch(FILL_ALL_FIELDS, ToastTypeE.Error)
             return;
         }
 
@@ -126,21 +132,20 @@ const SurveyForm = () => {
         console.log(res)
 
         if (!res) {
-            setFormReponse("Something went wrong")
+            toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error)
             return
         }
 
         if (res === 200) {
-            setFormReponse("Succesfull submission")
+            toastContext.dispatch(SUCCESS, ToastTypeE.Success)
             return
         }
 
-        setFormReponse("Something went wrong")
+        toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error)
     }
 
     return (
         <div className="form">
-            <label className={formReponse === "Succesfull submission" ? "formSuccess" : "formError"}>{formReponse}</label>
             <form onSubmit={(e) => handleSubmitForm(e)}>
                 {questions?.data
                     .map((q: Question) => {

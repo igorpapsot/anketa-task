@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import ToastTypeE from "../ToastComponent/ToastTypeE";
-import ToastList from "../ToastComponent/ToastList";
+import ToastTypeE from "../ToastComponents/ToastTypeE";
+import ToastList from "../ToastComponents/ToastList";
 
 interface ToastContextType {
     dispatch: any;
@@ -18,8 +18,11 @@ export default function ToastProvider({ children }: { children: JSX.Element }) {
     const [toasts, setToasts] = useState<ToastType[]>([])
 
     const dispatch = (text: string, type: ToastTypeE) => {
-        console.log("dispatch")
         setToasts((prev) => [...prev, { text, type }])
+
+        setTimeout(() => {
+            setToasts((prev) => prev.slice(1))
+        }, 5000)
     }
 
     return (
@@ -33,7 +36,7 @@ export default function ToastProvider({ children }: { children: JSX.Element }) {
 export const useToast = () => {
     const context = useContext(ToastContext);
     if (!context) {
-        throw new Error("useToast must be used within an AuthProvider");
+        throw new Error("useToast must be used within an ToastProvider");
     }
     return context;
 };

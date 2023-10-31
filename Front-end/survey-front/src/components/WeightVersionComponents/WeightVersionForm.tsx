@@ -9,6 +9,8 @@ import WeightList from "./WeightList";
 import Dropdown from "../ToolComponents/Dropdown";
 import { useQuery } from "@tanstack/react-query";
 import '../../css/weightVersions.scss'
+import { useToast } from "../Contexts/ToastContext";
+import ToastTypeE from "../ToastComponents/ToastTypeE";
 
 const addWeightVersionRequest = async (versionName: string, weights: Weight[]) => {
     try {
@@ -48,18 +50,18 @@ const SELECT_ALL_QUESTIONS = "Please create weights for all questions"
 const SUCCESS = "Succesfull creating of weight version"
 const NULL = "Please select weight and question"
 const ENTER_NAME = "Please enter version name"
+const SOMETHING_WENT_WRONG = "Something went wrong"
 
 const WeightVersionForm = () => {
 
     const auth = useAuth()
+    const toastContext = useToast()
 
     if (!auth.getLogged() || auth.getUser()?.["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] !== "Admin") {
         return (
             <ErrorPage errorMessageProp={NOT_AUTHORIZED} />
         )
     }
-
-    const [error, setError] = useState<string>("")
 
     const [versionName, setVersionName] = useState<string>("")
     const [weightValue, setWeightValue] = useState<number>(0)
@@ -73,7 +75,7 @@ const WeightVersionForm = () => {
 
     const addWeightHandler = () => {
         if (weightValue === 0 || selectedQuestionId === -1) {
-            setError(NULL)
+            toastContext.dispatch(NULL, ToastTypeE.Error)
             return
         }
 
@@ -84,21 +86,20 @@ const WeightVersionForm = () => {
                 value: weightValue
             }
             setWeights((prevState) => [...prevState, weight]);
-            setError("")
             return
         }
-        setError(WEIGHT_EXISTS)
+        toastContext.dispatch(WEIGHT_EXISTS, ToastTypeE.Error)
     }
 
     const addVersionHandler = async () => {
         if (versionName === "") {
-            setError(ENTER_NAME)
+            toastContext.dispatch(ENTER_NAME, ToastTypeE.Error)
             return
         }
 
         const allWeightsExist = weights.length === questions?.data.length
         if (!allWeightsExist) {
-            setError(SELECT_ALL_QUESTIONS)
+            toastContext.dispatch(SELECT_ALL_QUESTIONS, ToastTypeE.Error)
             return
         }
         console.log("Sending data ...")
@@ -106,16 +107,16 @@ const WeightVersionForm = () => {
         console.log(res)
 
         if (!res) {
-            setError("Something went wrong")
+            toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error)
             return
         }
 
         if (res === 200) {
-            setError(SUCCESS)
+            toastContext.dispatch(SUCCESS, ToastTypeE.Success)
             return
         }
 
-        setError("Something went wrong")
+        toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error)
     }
 
     const removeWeightHandler = (weightIndex: number) => {
@@ -126,7 +127,6 @@ const WeightVersionForm = () => {
 
     return (
         <div className="weightVersions">
-            <label className={error === SUCCESS ? "formSuccess" : "formError"}>{error}</label>
             <Dropdown values={questions?.data.map((q: Question) => { return { id: q.id, value: q.index + ":" + q.description } })}
                 selectedValue={selectedQuestionId} setSelected={setSelectedQuestionId} label={"Question"} />
 
