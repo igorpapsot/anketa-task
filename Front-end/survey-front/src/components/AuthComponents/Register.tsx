@@ -4,6 +4,8 @@ import axios, { AxiosError } from "axios";
 import { registerUrl } from "../../global/env";
 import { useNavigate } from "react-router-dom";
 import '../../css/auth.scss'
+import Toast from "../ToastComponent/Toast";
+import ToastType from "../ToastComponent/ToastTypeE";
 
 const registerRequest = async (username: string, password: string) => {
     try {
@@ -25,7 +27,7 @@ const registerRequest = async (username: string, password: string) => {
 const SUCCESFULL_REGISTER = "Succesfull register"
 const UNSUCCESFULL_REGISTER = "Wrong username or password"
 const FILL_OUT_FIELDS = "Please fill out all fields"
-const PASSWORDS_NOT_MATCHING = "Passwords dont match"
+const PASSWORDS_NOT_MATCHING = "Passwords don't match"
 
 const Register = () => {
 
@@ -67,12 +69,16 @@ const Register = () => {
 
     return (
         <form className="authPage" onSubmit={(e) => registerHandler(e)}>
-            <label className={error === SUCCESFULL_REGISTER ? "formSuccess" : "formError"}>{error}</label>
             <TextInput label="Username" state={username} setState={setUsername} type="email"></TextInput>
             <TextInput label="Password" state={password} setState={setPassword} type="password"></TextInput>
             <TextInput label="Repeat password" state={repeatPassword} setState={setRepeatPassword} type="password"></TextInput>
 
             <button type="submit" className="button">Register</button>
+
+            {error === UNSUCCESFULL_REGISTER && <Toast text={error} type={ToastType.Error} />}
+            {error === FILL_OUT_FIELDS && <Toast text={error} type={ToastType.Error} />}
+            {error === SUCCESFULL_REGISTER && <Toast text={error} type={ToastType.Success} />}
+            {error === PASSWORDS_NOT_MATCHING && <Toast text={error} type={ToastType.Error} />}
         </form>
     )
 }

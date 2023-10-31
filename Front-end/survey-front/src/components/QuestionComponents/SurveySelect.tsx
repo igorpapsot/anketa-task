@@ -1,4 +1,4 @@
-import { NOT_AUTHORIZED, useAuth } from "../ToolComponents/AuthContext"
+import { NOT_AUTHORIZED, useAuth } from "../Contexts/AuthContext"
 import ErrorPage from "../ToolComponents/ErrorPage"
 import SurveySelect from "../ToolComponents/SurveySelect"
 

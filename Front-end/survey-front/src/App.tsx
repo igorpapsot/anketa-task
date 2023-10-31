@@ -1,8 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import './App.css'
 import NavHeader from './components/Header/NavHeader'
 import { Outlet } from 'react-router-dom'
-import AuthProvider from './components/ToolComponents/AuthContext'
+import AuthProvider from './components/Contexts/AuthContext'
 
 function App() {
 

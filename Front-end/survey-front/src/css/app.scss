@@ -4,22 +4,8 @@ $background: #F3F0E7;
 $border: 1px solid rgb(115, 110, 110);
 $border-radius: 5px;
 $border-bold: 2px solid rgb(115, 110, 110);
-$error-color: rgb(217, 48, 48);
-$succes-color: rgb(29, 193, 29);
 
 /*General*/
-
-.formError {
-    color: $error-color;
-    font-size: large;
-    font-weight: bold;
-}
-
-.formSuccess {
-    color: $succes-color;
-    font-size: large;
-    font-weight: bold;
-}
 
 .input {
     background-color: rgb(205, 204, 204);
@@ -68,10 +54,8 @@ label {
 
 body {
     background-color: $background;
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-bottom: 20px;
+    margin: 0px;
+    min-height: 100vh;
     font-family: $font;
 }
 

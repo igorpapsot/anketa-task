@@ -5,7 +5,7 @@ import { questionUrl, submissionUrl } from "../../global/env";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/AuthContext";
+import { useAuth, NOT_AUTHORIZED } from "../Contexts/AuthContext";
 import ErrorPage from "../ToolComponents/ErrorPage";
 import '../../css/form.scss'
 

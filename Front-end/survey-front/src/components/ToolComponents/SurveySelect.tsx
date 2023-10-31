@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { clientUrl, projectUrl } from "../../global/env";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../Contexts/AuthContext";
 import Dropdown from "./Dropdown";
 import { useNavigate } from "react-router-dom";
 import '../../css/surveySelect.scss'

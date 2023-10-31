@@ -4,7 +4,7 @@ import TextInput from "../ToolComponents/TextInput";
 import NumberInput from "../ToolComponents/NumberInput";
 import axios, { AxiosError } from "axios";
 import { questionUrl, weightVersionUrl } from "../../global/env";
-import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/AuthContext";
+import { useAuth, NOT_AUTHORIZED } from "../Contexts/AuthContext";
 import WeightList from "./WeightList";
 import Dropdown from "../ToolComponents/Dropdown";
 import { useQuery } from "@tanstack/react-query";
