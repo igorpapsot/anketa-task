@@ -7,7 +7,7 @@ const ToastList = ({ toasts }: { toasts: ToastType[] }) => {
     if (toasts) {
         return (
             <div className="toastList">
-                {toasts.map((t: ToastType, i) => <Toast text={t.text} type={t.type} key={i} />)}
+                {toasts.map((t: ToastType, i) => <Toast text={t.text} type={t.type} id={t.id} key={i} />)}
             </div>
         )
     }

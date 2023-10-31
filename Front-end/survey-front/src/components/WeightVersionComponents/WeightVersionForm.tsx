@@ -75,7 +75,7 @@ const WeightVersionForm = () => {
 
     const addWeightHandler = () => {
         if (weightValue === 0 || selectedQuestionId === -1) {
-            toastContext.dispatch(NULL, ToastTypeE.Error)
+            toastContext.dispatch(NULL, ToastTypeE.Error, 5000)
             return
         }
 
@@ -88,18 +88,18 @@ const WeightVersionForm = () => {
             setWeights((prevState) => [...prevState, weight]);
             return
         }
-        toastContext.dispatch(WEIGHT_EXISTS, ToastTypeE.Error)
+        toastContext.dispatch(WEIGHT_EXISTS, ToastTypeE.Error, 5000)
     }
 
     const addVersionHandler = async () => {
         if (versionName === "") {
-            toastContext.dispatch(ENTER_NAME, ToastTypeE.Error)
+            toastContext.dispatch(ENTER_NAME, ToastTypeE.Error, 5000)
             return
         }
 
         const allWeightsExist = weights.length === questions?.data.length
         if (!allWeightsExist) {
-            toastContext.dispatch(SELECT_ALL_QUESTIONS, ToastTypeE.Error)
+            toastContext.dispatch(SELECT_ALL_QUESTIONS, ToastTypeE.Error, 5000)
             return
         }
         console.log("Sending data ...")
@@ -107,16 +107,16 @@ const WeightVersionForm = () => {
         console.log(res)
 
         if (!res) {
-            toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error)
+            toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error, 5000)
             return
         }
 
         if (res === 200) {
-            toastContext.dispatch(SUCCESS, ToastTypeE.Success)
+            toastContext.dispatch(SUCCESS, ToastTypeE.Success, 5000)
             return
         }
 
-        toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error)
+        toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error, 5000)
     }
 
     const removeWeightHandler = (weightIndex: number) => {

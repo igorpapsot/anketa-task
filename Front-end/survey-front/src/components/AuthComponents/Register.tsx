@@ -41,12 +41,12 @@ const Register = () => {
     const registerHandler = async (e: React.FormEvent) => {
         e.preventDefault()
         if (username == "" || password == "") {
-            toastContext.dispatch(FILL_OUT_FIELDS, ToastTypeE.Error)
+            toastContext.dispatch(FILL_OUT_FIELDS, ToastTypeE.Error, 5000)
             return
         }
 
         if (password !== repeatPassword) {
-            toastContext.dispatch(PASSWORDS_NOT_MATCHING, ToastTypeE.Error)
+            toastContext.dispatch(PASSWORDS_NOT_MATCHING, ToastTypeE.Error, 5000)
             return
         }
 
@@ -54,17 +54,17 @@ const Register = () => {
         console.log(res)
 
         if (!res) {
-            toastContext.dispatch(UNSUCCESFULL_REGISTER, ToastTypeE.Error)
+            toastContext.dispatch(UNSUCCESFULL_REGISTER, ToastTypeE.Error, 5000)
             return
         }
 
         if (res === 200) {
-            toastContext.dispatch(SUCCESFULL_REGISTER, ToastTypeE.Success)
+            toastContext.dispatch(SUCCESFULL_REGISTER, ToastTypeE.Success, 5000)
             navigate("/login")
             return
         }
 
-        toastContext.dispatch(UNSUCCESFULL_REGISTER, ToastTypeE.Error)
+        toastContext.dispatch(UNSUCCESFULL_REGISTER, ToastTypeE.Error, 5000)
     }
 
     return (

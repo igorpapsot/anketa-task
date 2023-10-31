@@ -42,25 +42,25 @@ const Login = () => {
     const loginHandler = async (e: React.FormEvent) => {
         e.preventDefault()
         if (username == "" || password == "") {
-            toastContext.dispatch(FILL_OUT_FIELDS, ToastTypeE.Error)
+            toastContext.dispatch(FILL_OUT_FIELDS, ToastTypeE.Error, 1000)
             return
         }
 
         const res = await loginRequest(username, password)
 
         if (!res) {
-            toastContext.dispatch(UNSUCCESFULL_LOGIN, ToastTypeE.Error)
+            toastContext.dispatch(UNSUCCESFULL_LOGIN, ToastTypeE.Error, 10000)
             return
         }
 
         if (res.status === 200) {
-            toastContext.dispatch(SUCCESFULL_LOGIN, ToastTypeE.Success)
+            toastContext.dispatch(SUCCESFULL_LOGIN, ToastTypeE.Success, 5000)
             auth.login(res.data)
             navigate("/survey")
             return
         }
 
-        toastContext.dispatch(UNSUCCESFULL_LOGIN, ToastTypeE.Error)
+        toastContext.dispatch(UNSUCCESFULL_LOGIN, ToastTypeE.Error, 5000)
     }
 
     return (

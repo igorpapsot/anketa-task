@@ -17,7 +17,7 @@ $background: rgb(205, 204, 204);
 
         &:hover {
             cursor: pointer;
-            background-color: rgb(170, 170, 170);
+            background-color: rgb(194, 194, 194);
         }
 
         &:active {
@@ -28,6 +28,10 @@ $background: rgb(205, 204, 204);
     .navLinkSelected {
         @extend .navLink;
         background-color: rgb(170, 170, 170);
+
+        &:hover {
+            background-color: rgb(170, 170, 170);
+        }
     }
 
     .navLinkLeft {

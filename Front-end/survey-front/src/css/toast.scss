@@ -30,6 +30,10 @@ $info-color: rgb(0, 60, 255);
     p {
         align-self: center
     }
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .infoToast {

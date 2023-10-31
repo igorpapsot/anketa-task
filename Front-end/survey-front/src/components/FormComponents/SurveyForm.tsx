@@ -118,7 +118,7 @@ const SurveyForm = () => {
         const requiredAnswersExist = requiredAnswers.length === requiredQuestions.length
 
         if (Number(projectId) === -1 || !requiredAnswersExist) {
-            toastContext.dispatch(FILL_ALL_FIELDS, ToastTypeE.Error)
+            toastContext.dispatch(FILL_ALL_FIELDS, ToastTypeE.Error, 5000)
             return;
         }
 
@@ -132,16 +132,16 @@ const SurveyForm = () => {
         console.log(res)
 
         if (!res) {
-            toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error)
+            toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error, 5000)
             return
         }
 
         if (res === 200) {
-            toastContext.dispatch(SUCCESS, ToastTypeE.Success)
+            toastContext.dispatch(SUCCESS, ToastTypeE.Success, 5000)
             return
         }
 
-        toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error)
+        toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error, 5000)
     }
 
     return (

@@ -1,14 +1,18 @@
 import { createContext, useContext, useState } from "react";
 import ToastTypeE from "../ToastComponents/ToastTypeE";
 import ToastList from "../ToastComponents/ToastList";
-
-interface ToastContextType {
-    dispatch: any;
-}
+import { v4 as uuidv4 } from 'uuid';
 
 export interface ToastType {
-    text: string
-    type: ToastTypeE
+    id?: string,
+    text: string,
+    type: ToastTypeE,
+    duration: number
+}
+
+interface ToastContextType {
+    dispatch: (text: string, type: ToastTypeE, duration: number) => void;
+    closeToast: (toastId: string) => void;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
@@ -17,16 +21,21 @@ export default function ToastProvider({ children }: { children: JSX.Element }) {
 
     const [toasts, setToasts] = useState<ToastType[]>([])
 
-    const dispatch = (text: string, type: ToastTypeE) => {
-        setToasts((prev) => [...prev, { text, type }])
+    const dispatch = (text: string, type: ToastTypeE, duration: number) => {
+        const id = uuidv4();
+        setToasts((prev) => [...prev, { id, text, type, duration }])
 
         setTimeout(() => {
-            setToasts((prev) => prev.slice(1))
-        }, 5000)
+            setToasts((prev) => prev.filter((toast) => toast.id !== id));
+        }, duration)
+    }
+
+    const closeToast = (id: string) => {
+        setToasts((prev) => prev.filter((toast) => toast.id !== id));
     }
 
     return (
-        <ToastContext.Provider value={{ dispatch }}>
+        <ToastContext.Provider value={{ dispatch, closeToast }}>
             <ToastList toasts={toasts} />
             {children}
         </ToastContext.Provider>
