@@ -5,6 +5,7 @@ import { clientUrl, projectUrl } from "../../global/env";
 import { useAuth } from "./AuthContext";
 import Dropdown from "./Dropdown";
 import { useNavigate } from "react-router-dom";
+import '../../css/surveySelect.scss'
 
 const SurveySelect = ({ setSelectedProjectId, stats }: { setSelectedProjectId?: any; stats: boolean }) => {
 
@@ -45,6 +46,7 @@ const SurveySelect = ({ setSelectedProjectId, stats }: { setSelectedProjectId?: 
         queryKey: ['getClients'],
         queryFn: getClients,
     });
+
 
     useEffect(() => {
         if (selectedClientId === -1) {

@@ -1,0 +1,23 @@
+@import 'app.scss';
+
+.weightVersions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weightListItem {
+    border: $border;
+    padding: 5px;
+    margin: 5px;
+    border-radius: $border-radius;
+}
+
+.weightList {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.weightWidth {
+    width: 20%;
+}

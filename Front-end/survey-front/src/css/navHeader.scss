@@ -1,0 +1,31 @@
+$background: rgb(205, 204, 204);
+
+.navHeader {
+    background-color: $background;
+    // padding: 15px;
+    margin: 0px;
+    display: flex;
+
+    .navLink {
+        border: 0px;
+        // margin: 0px 10px;
+        padding: 20px 20px;
+        font-size: large;
+        font-weight: bolder;
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(170, 170, 170);
+        }
+
+        &:focus {
+            background-color: rgb(130, 130, 130);
+        }
+    }
+
+    .navLinkLeft {
+        margin-right: auto;
+    }
+}

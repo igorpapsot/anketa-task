@@ -1,3 +1,4 @@
+
 const StatsTable = ({ grades }: { grades: Grade[] }) => {
 
     const getAverageGrade = (original: boolean) => {

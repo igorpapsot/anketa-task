@@ -1,3 +1,5 @@
+import '../../css/submitButton.scss'
+
 const FormButton = ({ projectId }: { projectId: number }) => {
 
     return (

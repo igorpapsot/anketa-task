@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 import { loginUrl } from "../../global/env";
 import { useAuth } from "../ToolComponents/AuthContext";
 import { useNavigate } from "react-router-dom";
+import '../../css/auth.scss'
 
 const loginRequest = async (username: string, password: string) => {
     try {

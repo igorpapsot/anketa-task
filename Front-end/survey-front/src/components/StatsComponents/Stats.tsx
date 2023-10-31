@@ -7,6 +7,7 @@ import ErrorPage from "../ToolComponents/ErrorPage"
 import { useQuery } from "@tanstack/react-query"
 import StatsTable from "./StatsTable"
 import Dropdown from "../ToolComponents/Dropdown"
+import '../../css/stats.scss'
 
 const getWeightVersions = async (token: string) => {
     console.log("Getting weight versions...")

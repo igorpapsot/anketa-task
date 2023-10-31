@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/AuthContext";
 import ErrorPage from "../ToolComponents/ErrorPage";
+import '../../css/form.scss'
 
 const getQuestions = async (token: string) => {
     console.log("Getting questions...")

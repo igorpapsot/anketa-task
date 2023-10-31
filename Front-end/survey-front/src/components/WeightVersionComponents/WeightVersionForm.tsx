@@ -8,6 +8,7 @@ import { useAuth, NOT_AUTHORIZED } from "../ToolComponents/AuthContext";
 import WeightList from "./WeightList";
 import Dropdown from "../ToolComponents/Dropdown";
 import { useQuery } from "@tanstack/react-query";
+import '../../css/weightVersions.scss'
 
 const addWeightVersionRequest = async (versionName: string, weights: Weight[]) => {
     try {

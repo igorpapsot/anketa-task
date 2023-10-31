@@ -1,3 +1,5 @@
+import '../../css/answer.scss'
+
 const Answer = ({ answer, selectedId, setSelectedId, setText }: { answer: Answer; selectedId?: number; setSelectedId: any; setText: any }) => {
 
     const checked = selectedId === answer.id

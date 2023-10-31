@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../ToolComponents/AuthContext";
+import '../../css/navHeader.scss'
 
 const NavHeader = () => {
     const auth = useAuth()

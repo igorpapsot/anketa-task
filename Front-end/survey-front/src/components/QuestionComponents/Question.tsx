@@ -1,3 +1,5 @@
+import '../../css/requiredQuestion.scss'
+
 const Question = ({ question }: { question: Question }) => {
 
     return (

@@ -3,6 +3,7 @@ import TextInput from "../ToolComponents/TextInput"
 import axios, { AxiosError } from "axios";
 import { registerUrl } from "../../global/env";
 import { useNavigate } from "react-router-dom";
+import '../../css/auth.scss'
 
 const registerRequest = async (username: string, password: string) => {
     try {

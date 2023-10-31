@@ -1,0 +1,18 @@
+.choice {
+    display: flex;
+    justify-content: center;
+
+    .choiceVal {
+        align-self: center;
+    }
+
+    .textChoice {
+        align-self: center;
+        width: 70%;
+        height: 60%;
+    }
+
+    .choiceButton {
+        align-self: center;
+    }
+}

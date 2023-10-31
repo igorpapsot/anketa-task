@@ -1,0 +1,18 @@
+.submitBtn {
+    padding: 5px 40px;
+    font-size: medium;
+
+    :disabled:active {
+        box-shadow: none;
+    }
+
+    :active {
+        box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(190, 211, 251, 0.25), 0px 0px 0px 3.5px rgba(62, 66, 74, 0.5);
+    }
+}
+
+.submitBtnArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

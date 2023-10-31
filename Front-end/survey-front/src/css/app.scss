@@ -1,0 +1,88 @@
+/*Variables*/
+$font: fantasy;
+$background: #F3F0E7;
+$border: 1px solid rgb(115, 110, 110);
+$border-radius: 5px;
+$border-bold: 2px solid rgb(115, 110, 110);
+$error-color: rgb(217, 48, 48);
+$succes-color: rgb(29, 193, 29);
+
+/*General*/
+
+.formError {
+    color: $error-color;
+    font-size: large;
+    font-weight: bold;
+}
+
+.formSuccess {
+    color: $succes-color;
+    font-size: large;
+    font-weight: bold;
+}
+
+.input {
+    background-color: rgb(205, 204, 204);
+    border: $border;
+    border-radius: $border-radius;
+    margin: 10px;
+    padding: 5px 20px;
+    width: 35vh;
+}
+
+.button {
+    background-color: rgb(205, 204, 204);
+    border: $border;
+    border-radius: $border-radius;
+    margin: 20px;
+    padding: 5px 20px;
+    width: 35vh;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:disabled:active {
+        box-shadow: none;
+    }
+
+    &:active {
+        box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(190, 211, 251, 0.25), 0px 0px 0px 3.5px rgba(62, 66, 74, 0.5);
+    }
+}
+
+.dropdown {
+    background-color: rgb(205, 204, 204);
+    border: $border;
+    border-radius: $border-radius;
+    margin: 10px;
+    padding: 5px 20px;
+    margin: 5px;
+    width: 35vh;
+    text-align: center;
+}
+
+label {
+    margin-top: 5px;
+}
+
+body {
+    background-color: $background;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 20px;
+    font-family: $font;
+}
+
+.root {
+    height: 100vh;
+    width: 100vh;
+}
+
+input,
+select {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}

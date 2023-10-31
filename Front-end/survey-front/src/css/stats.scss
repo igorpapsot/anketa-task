@@ -1,0 +1,44 @@
+@import 'app.scss';
+
+.statsPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.gradeTable {
+    width: 70vw;
+    border-collapse: collapse;
+    margin: 20px 0;
+
+    th,
+    td {
+        border: $border;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tbody {
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+    }
+
+    tr:nth-child(odd) {
+        background-color: rgb(205, 204, 204);
+    }
+
+    .average-row {
+        font-weight: bold;
+        border: $border-bold;
+    }
+}

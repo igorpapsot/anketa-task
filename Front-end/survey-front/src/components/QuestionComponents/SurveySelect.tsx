@@ -12,7 +12,7 @@ const SurveyPage = () => {
     }
 
     return (
-        <div className="dropDownPage">
+        <div className="surveySelect">
             <h1>Survey for evaluating clients</h1>
             <SurveySelect stats={false}></SurveySelect>
         </div>

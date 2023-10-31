@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Answer from "./Answer";
 import InputQuestion from "./Question";
+import '../../css/form.scss'
 
 const QuestionField = ({ question, addAnswer }: { question: Question; addAnswer: any }) => {
 

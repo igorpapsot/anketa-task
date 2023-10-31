@@ -11,7 +11,7 @@ const Dropdown = <T extends { id: number, value: string }>({ values, setSelected
     if (values == undefined) {
         return (
             <>
-                {label}
+                <label>{label}</label>
                 <select className="dropdown">
                     {label === "Project" ? <option>Select client first</option> : <option>No values found</option>}
 
