@@ -1,3 +1,4 @@
+//For debugging
 const WeightList = ({ weights, removeWeightHandler }: { weights: Weight[]; removeWeightHandler: any }) => {
     return (
         <div className="weightList">

@@ -2,8 +2,37 @@
 
 .weightVersions {
     display: flex;
+    grid-template-columns: 45% 10% 45%;
+    margin-top: 20px;
     flex-direction: column;
+}
+
+// .questionWeightBtn {
+//     @extend .button;
+//     width: 20vh;
+// }
+
+.questionWeight {
+    display: grid;
     align-items: center;
+    grid-template-columns: 85% 15%;
+    background-color: white;
+    margin: 5px 0px;
+    padding: 10px;
+}
+
+.weightVersionRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.weightQuestionRow {
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: center;
 }
 
 .weightListItem {

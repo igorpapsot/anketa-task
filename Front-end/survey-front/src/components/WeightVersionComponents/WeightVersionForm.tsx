@@ -1,16 +1,15 @@
 import { useState } from "react";
 import ErrorPage from "../ToolComponents/ErrorPage";
 import TextInput from "../ToolComponents/TextInput";
-import NumberInput from "../ToolComponents/NumberInput";
 import axios, { AxiosError } from "axios";
 import { questionUrl, weightVersionUrl } from "../../global/env";
 import { useAuth, NOT_AUTHORIZED } from "../Contexts/AuthContext";
-import WeightList from "./WeightList";
-import Dropdown from "../ToolComponents/Dropdown";
+// import WeightList from "./WeightList";
 import { useQuery } from "@tanstack/react-query";
 import '../../css/weightVersions.scss'
 import { useToast } from "../Contexts/ToastContext";
 import ToastTypeE from "../ToastComponents/ToastTypeE";
+import QuestionWeight from "./QuestionWeight";
 
 const addWeightVersionRequest = async (versionName: string, weights: Weight[]) => {
     try {
@@ -45,8 +44,6 @@ const getQuestions = async (token: string) => {
     }
 };
 
-const WEIGHT_EXISTS = "Weight for this questions already added"
-const SELECT_ALL_QUESTIONS = "Please create weights for all questions"
 const SUCCESS = "Succesfull creating of weight version"
 const NULL = "Please select weight and question"
 const ENTER_NAME = "Please enter version name"
@@ -64,31 +61,40 @@ const WeightVersionForm = () => {
     }
 
     const [versionName, setVersionName] = useState<string>("")
-    const [weightValue, setWeightValue] = useState<number>(0)
+
     const [weights, setWeights] = useState<Weight[]>([])
-    const [selectedQuestionId, setSelectedQuestionId] = useState<number>(-1)
 
     const { data: questions } = useQuery({
         queryKey: ['getQuestions'],
         queryFn: () => getQuestions(auth.getToken()),
     });
 
-    const addWeightHandler = () => {
-        if (weightValue === 0 || selectedQuestionId === -1) {
+    const changeWeightHandler = (questionId: number, weightValue: number) => {
+        if (weightValue === 0 || questionId === -1) {
             toastContext.dispatch(NULL, ToastTypeE.Error, 5000)
             return
         }
 
-        const weightForQuestion = weights.some((w) => w.index === selectedQuestionId);
+        const weightForQuestion = weights.some((w) => w.index === questionId);
         if (!weightForQuestion) {
             let weight: Weight = {
-                index: selectedQuestionId,
+                index: questionId,
                 value: weightValue
             }
             setWeights((prevState) => [...prevState, weight]);
             return
         }
-        toastContext.dispatch(WEIGHT_EXISTS, ToastTypeE.Error, 5000)
+
+        const nextWeights = weights.map((w) => {
+            if (w.index === questionId) {
+                w.value = weightValue
+                return w;
+            } else {
+                return w;
+            }
+        });
+
+        setWeights(nextWeights);
     }
 
     const addVersionHandler = async () => {
@@ -97,11 +103,6 @@ const WeightVersionForm = () => {
             return
         }
 
-        const allWeightsExist = weights.length === questions?.data.length
-        if (!allWeightsExist) {
-            toastContext.dispatch(SELECT_ALL_QUESTIONS, ToastTypeE.Error, 5000)
-            return
-        }
         console.log("Sending data ...")
         const res = await addWeightVersionRequest(versionName, weights)
         console.log(res)
@@ -119,23 +120,25 @@ const WeightVersionForm = () => {
         toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error, 5000)
     }
 
-    const removeWeightHandler = (weightIndex: number) => {
-        setWeights((prev) => {
-            return [...prev.filter(a => a.index !== weightIndex)]
-        })
-    }
+    // const removeWeightHandler = (weightIndex: number) => {
+    //     setWeights((prev) => {
+    //         return [...prev.filter(a => a.index !== weightIndex)]
+    //     })
+    // }
 
     return (
         <div className="weightVersions">
-            <Dropdown values={questions?.data.map((q: Question) => { return { id: q.id, value: q.index + ":" + q.description } })}
-                selectedValue={selectedQuestionId} setSelected={setSelectedQuestionId} label={"Question"} />
+            <div className="weightQuestionRow">
+                {questions?.data.map((q: Question) => { return <QuestionWeight q={q} changeWeight={changeWeightHandler} key={q.id} /> })}
+            </div>
 
-            <NumberInput label="Weight value" state={weightValue} setState={setWeightValue} min={1} max={10} />
-            <button className="button" onClick={() => addWeightHandler()}>Add weight</button>
-            <TextInput label="Version name" state={versionName} setState={setVersionName} type="text" />
-            <button type="submit" className="button" onClick={() => addVersionHandler()}>Submit</button>
+            <div className="weightVersionRow">
+                <TextInput label="Version name" state={versionName} setState={setVersionName} type="text" />
+                <button type="submit" className="button" onClick={() => addVersionHandler()}>Submit</button>
 
-            <WeightList weights={weights} removeWeightHandler={removeWeightHandler} />
+                {/* For debugging
+                <WeightList weights={weights} removeWeightHandler={removeWeightHandler} /> */}
+            </div>
         </div>
     )
 }

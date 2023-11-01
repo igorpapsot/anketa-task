@@ -62,7 +62,7 @@ const Stats = () => {
     }
 
     return (
-        <div className="weightVersions">
+        <div className="statsPage">
             <SurveySelect stats={true} setSelectedProjectId={setProjectId} />
             <Dropdown selectedValue={selectedVersion} values={versions?.data.map((v: WeightVersion) => { return { id: v.id, value: v.versionName } })} setSelected={setSelectedVersion} label={"Weight version"} />
             <button className="button" onClick={() => showStatsHandler()}>Show stats</button>
