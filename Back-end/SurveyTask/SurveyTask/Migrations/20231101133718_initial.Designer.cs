@@ -12,7 +12,7 @@ using SurveyTask.Data;
 namespace SurveyTask.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    [Migration("20231026084229_initial")]
+    [Migration("20231101133718_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -372,8 +372,8 @@ namespace SurveyTask.Migrations
                     b.Property<int>("Index")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Value")
-                        .HasColumnType("integer");
+                    b.Property<double>("Value")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("WeightVersionId")
                         .HasColumnType("integer");
@@ -389,84 +389,84 @@ namespace SurveyTask.Migrations
                         {
                             Id = 1,
                             Index = 1,
-                            Value = 1,
+                            Value = 1.0,
                             WeightVersionId = 3
                         },
                         new
                         {
                             Id = 2,
                             Index = 2,
-                            Value = 2,
+                            Value = 2.0,
                             WeightVersionId = 3
                         },
                         new
                         {
                             Id = 3,
                             Index = 3,
-                            Value = 3,
+                            Value = 3.0,
                             WeightVersionId = 3
                         },
                         new
                         {
                             Id = 4,
                             Index = 4,
-                            Value = 0,
+                            Value = 0.0,
                             WeightVersionId = 3
                         },
                         new
                         {
                             Id = 5,
                             Index = 1,
-                            Value = 2,
+                            Value = 2.0,
                             WeightVersionId = 1
                         },
                         new
                         {
                             Id = 6,
                             Index = 2,
-                            Value = 2,
+                            Value = 2.0,
                             WeightVersionId = 1
                         },
                         new
                         {
                             Id = 7,
                             Index = 3,
-                            Value = 2,
+                            Value = 2.0,
                             WeightVersionId = 1
                         },
                         new
                         {
                             Id = 8,
                             Index = 4,
-                            Value = 0,
+                            Value = 0.0,
                             WeightVersionId = 1
                         },
                         new
                         {
                             Id = 9,
                             Index = 1,
-                            Value = 2,
+                            Value = 2.0,
                             WeightVersionId = 2
                         },
                         new
                         {
                             Id = 10,
                             Index = 2,
-                            Value = 2,
+                            Value = 2.0,
                             WeightVersionId = 2
                         },
                         new
                         {
                             Id = 11,
                             Index = 3,
-                            Value = 1,
+                            Value = 1.0,
                             WeightVersionId = 2
                         },
                         new
                         {
                             Id = 12,
                             Index = 4,
-                            Value = 0,
+                            Value = 0.0,
                             WeightVersionId = 2
                         });
                 });

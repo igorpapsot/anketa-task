@@ -120,12 +120,6 @@ const WeightVersionForm = () => {
         toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error, 5000)
     }
 
-    // const removeWeightHandler = (weightIndex: number) => {
-    //     setWeights((prev) => {
-    //         return [...prev.filter(a => a.index !== weightIndex)]
-    //     })
-    // }
-
     return (
         <div className="weightVersions">
             <div className="weightQuestionRow">
@@ -135,9 +129,6 @@ const WeightVersionForm = () => {
             <div className="weightVersionRow">
                 <TextInput label="Version name" state={versionName} setState={setVersionName} type="text" />
                 <button type="submit" className="button" onClick={() => addVersionHandler()}>Submit</button>
-
-                {/* For debugging
-                <WeightList weights={weights} removeWeightHandler={removeWeightHandler} /> */}
             </div>
         </div>
     )

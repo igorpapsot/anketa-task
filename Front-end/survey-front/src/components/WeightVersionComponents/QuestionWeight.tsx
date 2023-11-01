@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import '../../css/app.scss'
 
 const QuestionWeight = ({ q, changeWeight }: { q: Question; changeWeight: any; }) => {
     const [weightValue, setWeightValue] = useState<number>(1)

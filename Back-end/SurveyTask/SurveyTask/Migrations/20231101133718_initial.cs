@@ -136,7 +136,7 @@ namespace SurveyTask.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     WeightVersionId = table.Column<int>(type: "integer", nullable: false),
                     Index = table.Column<int>(type: "integer", nullable: false),
-                    Value = table.Column<int>(type: "integer", nullable: false),
+                    Value = table.Column<double>(type: "double precision", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -240,18 +240,18 @@ namespace SurveyTask.Migrations
                 columns: new[] { "Id", "DeletedAt", "Index", "Value", "WeightVersionId" },
                 values: new object[,]
                 {
-                    { 1, null, 1, 1, 3 },
-                    { 2, null, 2, 2, 3 },
-                    { 3, null, 3, 3, 3 },
-                    { 4, null, 4, 0, 3 },
-                    { 5, null, 1, 2, 1 },
-                    { 6, null, 2, 2, 1 },
-                    { 7, null, 3, 2, 1 },
-                    { 8, null, 4, 0, 1 },
-                    { 9, null, 1, 2, 2 },
-                    { 10, null, 2, 2, 2 },
-                    { 11, null, 3, 1, 2 },
-                    { 12, null, 4, 0, 2 }
+                    { 1, null, 1, 1.0, 3 },
+                    { 2, null, 2, 2.0, 3 },
+                    { 3, null, 3, 3.0, 3 },
+                    { 4, null, 4, 0.0, 3 },
+                    { 5, null, 1, 2.0, 1 },
+                    { 6, null, 2, 2.0, 1 },
+                    { 7, null, 3, 2.0, 1 },
+                    { 8, null, 4, 0.0, 1 },
+                    { 9, null, 1, 2.0, 2 },
+                    { 10, null, 2, 2.0, 2 },
+                    { 11, null, 3, 1.0, 2 },
+                    { 12, null, 4, 0.0, 2 }
                 });
 
             migrationBuilder.CreateIndex(
