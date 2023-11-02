@@ -62,7 +62,6 @@ const SurveySelect = ({ setSelectedProjectId, stats }: { setSelectedProjectId?: 
             return
         }
         setSelectedProjectId(e)
-
     }
 
     return (

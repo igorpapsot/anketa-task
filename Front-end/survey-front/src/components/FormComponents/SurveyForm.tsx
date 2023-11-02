@@ -1,10 +1,10 @@
 import QuestionField from "../QuestionComponents/QuestionField";
 import FormButton from "./FormButton";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { questionUrl, submissionUrl } from "../../global/env";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth, NOT_AUTHORIZED } from "../Contexts/AuthContext";
 import ErrorPage from "../ToolComponents/ErrorPage";
 import '../../css/form.scss'
@@ -26,24 +26,20 @@ const getQuestions = async (token: string) => {
 const sendSubmssion = async (
     submission: Submission, token: string
 ) => {
-    try {
-        const response = await axios.post(submissionUrl, {
-            projectId: submission.projectId,
-            answeredQuestions: submission.answeredQuestions,
-        }, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        return response.status;
-    } catch (e) {
-        let error = e as AxiosError;
-        if (error.response) {
-            return error.response.status;
-        } else {
-            return false;
+    return await axios.post(submissionUrl, {
+        projectId: submission.projectId,
+        answeredQuestions: submission.answeredQuestions,
+    }, {
+        headers: {
+            Authorization: `Bearer ${token}`
         }
-    }
+    })
+        .then((response) => {
+            return response
+        })
+        .catch((error) => {
+            return error
+        });
 };
 
 const FILL_ALL_FIELDS = "Please answer all required questions";
@@ -51,12 +47,12 @@ const SOMETHING_WENT_WRONG = "Something went wrong"
 const SUCCESS = "Succesfull submission"
 
 const SurveyForm = () => {
-
     const [answers, setAnswers] = useState<AnsweredQuestion[]>([])
     const { projectId } = useParams()
 
     const auth = useAuth()
     const toastContext = useToast()
+    const navigate = useNavigate()
 
     if (!auth.getLogged()) {
         return (
@@ -67,6 +63,15 @@ const SurveyForm = () => {
     const { data: questions } = useQuery({
         queryKey: ['getQuestions'],
         queryFn: () => getQuestions(auth.getToken()),
+    });
+
+    const { isPending, mutateAsync } = useMutation({
+        mutationFn: (submission: Submission) => sendSubmssion(submission, auth.getToken()),
+        onError: () => toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error, 5000),
+        onSuccess: () => {
+            toastContext.dispatch(SUCCESS, ToastTypeE.Success, 5000)
+            navigate("/survey")
+        },
     });
 
     const handleAddAnswers = (answerId: number, questionId: number, text: string) => {
@@ -128,20 +133,7 @@ const SurveyForm = () => {
             projectId: Number(projectId)
         }
 
-        const res = await sendSubmssion(submission, auth.getToken())
-        console.log(res)
-
-        if (!res) {
-            toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error, 5000)
-            return
-        }
-
-        if (res === 200) {
-            toastContext.dispatch(SUCCESS, ToastTypeE.Success, 5000)
-            return
-        }
-
-        toastContext.dispatch(SOMETHING_WENT_WRONG, ToastTypeE.Error, 5000)
+        await mutateAsync(submission)
     }
 
     return (
@@ -152,6 +144,7 @@ const SurveyForm = () => {
                         return <QuestionField question={q} key={q.id} addAnswer={handleAddAnswers}></QuestionField>
                     })}
                 <FormButton projectId={Number(projectId)} />
+                {isPending && <strong>Submitting...</strong>}
             </form>
         </div>
     )

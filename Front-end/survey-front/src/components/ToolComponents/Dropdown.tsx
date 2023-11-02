@@ -22,7 +22,7 @@ const Dropdown = <T extends { id: number, value: string }>({ values, setSelected
 
     return (
         <>
-            <label>{label}:</label>
+            <label>{label}</label>
             <select className="dropdown" onChange={(e) => { setSelected(Number(e.target.value)) }}>
                 {selectedValue === -1 && <option value={-1} hidden>Select {label}</option>}
                 {values.length === 0 && <option disabled>No {label} found</option>}
