@@ -1,27 +1,24 @@
 import { useState } from "react"
 import TextInput from "../ToolComponents/TextInput"
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { registerUrl } from "../../global/env";
 import { useNavigate } from "react-router-dom";
 import '../../css/auth.scss'
 import { useToast } from "../Contexts/ToastContext";
 import ToastTypeE from "../ToastComponents/ToastTypeE";
+import { useMutation } from "@tanstack/react-query";
 
 const registerRequest = async (username: string, password: string) => {
-    try {
-        const response = await axios.post(registerUrl, {
-            username: username,
-            password: password
+    return await axios.post(registerUrl, {
+        username: username,
+        password: password
+    })
+        .then((response) => {
+            return response
+        })
+        .catch((error) => {
+            throw error
         });
-        return response.status;
-    } catch (e) {
-        let error = e as AxiosError;
-        if (error.response) {
-            return error.response.status;
-        } else {
-            return false;
-        }
-    }
 }
 
 const SUCCESFULL_REGISTER = "Succesfull register"
@@ -38,6 +35,15 @@ const Register = () => {
     const toastContext = useToast()
     const navigate = useNavigate()
 
+    const { isPending, mutateAsync } = useMutation({
+        mutationFn: () => registerRequest(username, password),
+        onError: () => toastContext.dispatch(UNSUCCESFULL_REGISTER, ToastTypeE.Error, 10000),
+        onSuccess: () => {
+            toastContext.dispatch(SUCCESFULL_REGISTER, ToastTypeE.Success, 5000)
+            navigate("/login")
+        },
+    });
+
     const registerHandler = async (e: React.FormEvent) => {
         e.preventDefault()
         if (username == "" || password == "") {
@@ -50,21 +56,7 @@ const Register = () => {
             return
         }
 
-        const res = await registerRequest(username, password)
-        console.log(res)
-
-        if (!res) {
-            toastContext.dispatch(UNSUCCESFULL_REGISTER, ToastTypeE.Error, 5000)
-            return
-        }
-
-        if (res === 200) {
-            toastContext.dispatch(SUCCESFULL_REGISTER, ToastTypeE.Success, 5000)
-            navigate("/login")
-            return
-        }
-
-        toastContext.dispatch(UNSUCCESFULL_REGISTER, ToastTypeE.Error, 5000)
+        await mutateAsync()
     }
 
     return (
@@ -73,6 +65,8 @@ const Register = () => {
             <TextInput label="Password" state={password} setState={setPassword} type="password"></TextInput>
             <TextInput label="Repeat password" state={repeatPassword} setState={setRepeatPassword} type="password"></TextInput>
             <button type="submit" className="button">Register</button>
+
+            {isPending && <strong>Registering...</strong>}
         </form>
     )
 }

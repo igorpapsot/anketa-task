@@ -1,4 +1,4 @@
-@import 'app.scss';
+@use 'app.scss';
 
 .statsPage {
     display: flex;
@@ -14,7 +14,7 @@
 
     th,
     td {
-        border: $border;
+        border: app.$border;
         padding: 8px;
         text-align: left;
     }
@@ -39,6 +39,6 @@
 
     .average-row {
         font-weight: bold;
-        border: $border-bold;
+        border: app.$border-bold;
     }
 }

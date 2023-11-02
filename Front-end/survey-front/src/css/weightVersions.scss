@@ -1,4 +1,4 @@
-@import 'app.scss';
+@use 'app.scss';
 
 .weightVersions {
     display: flex;
@@ -36,10 +36,10 @@
 }
 
 .weightListItem {
-    border: $border;
+    border: app.$border;
     padding: 5px;
     margin: 5px;
-    border-radius: $border-radius;
+    border-radius: app.$border-radius;
 }
 
 .weightList {
